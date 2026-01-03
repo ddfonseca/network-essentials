@@ -15,6 +15,7 @@
             --text-muted: #94a3b8;
             --border: #334155;
             --success: #22c55e;
+            --danger: #ef4444;
             --warning: #f59e0b;
         }
 
@@ -29,33 +30,447 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.7;
-            padding: 2rem 1rem;
+            min-height: 100vh;
         }
 
         .container {
             max-width: 900px;
             margin: 0 auto;
+            padding: 2rem 1rem;
         }
 
         header {
             text-align: center;
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
             border-bottom: 1px solid var(--border);
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             background: linear-gradient(135deg, var(--primary), #a855f7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         header p {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1rem;
+        }
+
+        /* Mode Switcher */
+        .mode-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .mode-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .mode-btn:hover {
+            border-color: var(--primary);
+        }
+
+        .mode-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        /* Flashcard Mode */
+        .flashcard-container {
+            display: none;
+        }
+
+        .flashcard-container.active {
+            display: block;
+        }
+
+        .flashcard-controls {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-btn:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .flashcard-progress {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        .progress-bar-flashcard {
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            margin: 0.5rem auto;
+            max-width: 300px;
+            overflow: hidden;
+        }
+
+        .progress-bar-flashcard .fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), #a855f7);
+            transition: width 0.3s;
+        }
+
+        .flashcard {
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 2px solid var(--border);
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .flashcard:hover {
+            border-color: var(--primary);
+        }
+
+        .flashcard-category {
+            padding: 0.75rem 1.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .flashcard-question {
+            padding: 2rem 1.5rem;
+            font-size: 1.15rem;
+            font-weight: 600;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .flashcard-answer {
+            padding: 1.5rem;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            display: none;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .flashcard-answer.visible {
+            display: block;
+        }
+
+        .flashcard-answer p {
+            margin: 0.75rem 0;
+        }
+
+        .flashcard-answer strong {
+            color: var(--primary);
+        }
+
+        .flashcard-answer ul, .flashcard-answer ol {
+            margin: 0.75rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .flashcard-answer li {
+            margin: 0.4rem 0;
+        }
+
+        .flashcard-answer pre {
+            background: var(--bg-code);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 0.75rem 0;
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+
+        .flashcard-answer code {
+            font-family: 'Fira Code', 'Consolas', monospace;
+            color: #7dd3fc;
+        }
+
+        .flashcard-answer p code {
+            background: var(--bg-code);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        .flashcard-answer table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.75rem 0;
+            font-size: 0.9rem;
+        }
+
+        .flashcard-answer th, .flashcard-answer td {
+            padding: 0.5rem;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        .flashcard-answer th {
+            background: var(--bg-card);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .flashcard-answer blockquote {
+            border-left: 3px solid var(--primary);
+            padding-left: 1rem;
+            margin: 0.75rem 0;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .flashcard-answer .alert {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 3px solid var(--warning);
+            padding: 0.75rem;
+            border-radius: 0 6px 6px 0;
+            margin: 0.75rem 0;
+        }
+
+        .flashcard-answer .alert-title {
+            color: var(--warning);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .reveal-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .reveal-btn:hover {
+            opacity: 0.9;
+        }
+
+        .reveal-btn.hidden {
+            display: none;
+        }
+
+        .flashcard-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-btn {
+            padding: 0.75rem 2rem;
+            border: 2px solid var(--border);
+            background: var(--bg-card);
+            color: var(--text);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .feedback-btns {
+            display: none;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feedback-btns.visible {
+            display: flex;
+        }
+
+        .feedback-btn {
+            padding: 0.75rem 2rem;
+            border: 2px solid;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feedback-btn.knew {
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .feedback-btn.knew:hover {
+            background: var(--success);
+            color: white;
+        }
+
+        .feedback-btn.didnt-know {
+            border-color: var(--danger);
+            color: var(--danger);
+        }
+
+        .feedback-btn.didnt-know:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .stat-value.correct {
+            color: var(--success);
+        }
+
+        .stat-value.incorrect {
+            color: var(--danger);
+        }
+
+        .stat-value.remaining {
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Completion Screen */
+        .completion-screen {
+            display: none;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 2px solid var(--success);
+        }
+
+        .completion-screen.visible {
+            display: block;
+        }
+
+        .completion-screen h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--success);
+        }
+
+        .completion-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+        }
+
+        .completion-stat {
+            text-align: center;
+        }
+
+        .completion-stat-value {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .completion-stat-label {
+            color: var(--text-muted);
+        }
+
+        .restart-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .restart-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* List Mode */
+        .list-container {
+            display: none;
+        }
+
+        .list-container.active {
+            display: block;
         }
 
         .section {
@@ -208,49 +623,6 @@
             font-style: italic;
         }
 
-        .checklist {
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: var(--bg-card);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-
-        .checklist h3 {
-            color: var(--success);
-            margin-bottom: 1rem;
-        }
-
-        .checklist label {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.5rem 0;
-            cursor: pointer;
-        }
-
-        .checklist input[type="checkbox"] {
-            width: 1.25rem;
-            height: 1.25rem;
-            accent-color: var(--success);
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: var(--border);
-            border-radius: 4px;
-            margin-top: 1rem;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--success), #4ade80);
-            width: 0%;
-            transition: width 0.3s;
-            border-radius: 4px;
-        }
-
         .cheatsheet {
             margin-top: 2rem;
         }
@@ -295,25 +667,65 @@
             color: var(--text-muted);
         }
 
+        /* Keyboard shortcuts hint */
+        .shortcuts-hint {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .shortcuts-hint kbd {
+            background: var(--bg-card);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            font-family: inherit;
+        }
+
         @media (max-width: 600px) {
             h1 {
                 font-size: 1.75rem;
             }
 
-            .question-header {
-                padding: 1rem;
+            .flashcard-question {
+                font-size: 1rem;
+                padding: 1.5rem 1rem;
             }
 
-            .answer {
-                padding: 0 1rem 1rem;
+            .flashcard-nav {
+                flex-direction: column;
             }
 
-            table {
-                font-size: 0.8rem;
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
             }
 
-            th, td {
-                padding: 0.5rem;
+            .feedback-btns {
+                flex-direction: column;
+            }
+
+            .feedback-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .stats-bar {
+                gap: 1rem;
+            }
+
+            .stat-value {
+                font-size: 1.2rem;
+            }
+
+            .shortcuts-hint {
+                display: none;
+            }
+
+            .completion-stats {
+                flex-direction: column;
+                gap: 1.5rem;
             }
         }
     </style>
@@ -322,1014 +734,861 @@
     <div class="container">
         <header>
             <h1>Network Essentials - Quiz Q/A</h1>
-            <p>Quiz para testar sua compreensao dos conceitos de networking essenciais para System Design Interviews</p>
+            <p>Conceitos de networking essenciais para System Design Interviews</p>
         </header>
 
-        <!-- Camadas de Rede e Modelo OSI -->
-        <section class="section">
-            <h2 class="section-title">📡 Camadas de Rede e Modelo OSI</h2>
+        <!-- Mode Switcher -->
+        <div class="mode-switcher">
+            <button class="mode-btn active" data-mode="flashcard">Flashcards</button>
+            <button class="mode-btn" data-mode="list">Lista Completa</button>
+        </div>
 
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q1: Por que o modelo de camadas e tao importante para desenvolvedores de aplicacoes?</span>
-                    <span class="toggle-icon">+</span>
+        <!-- Flashcard Mode -->
+        <div class="flashcard-container active" id="flashcardMode">
+            <div class="flashcard-controls">
+                <button class="control-btn" id="shuffleBtn">
+                    <span>🔀</span> Embaralhar
+                </button>
+                <button class="control-btn" id="resetBtn">
+                    <span>🔄</span> Reiniciar
+                </button>
+                <button class="control-btn" id="filterBtn">
+                    <span>📋</span> <span id="filterText">Todas (21)</span>
+                </button>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-value correct" id="correctCount">0</div>
+                    <div class="stat-label">Acertei</div>
                 </div>
-                <div class="answer">
-                    <p>O modelo de camadas funciona como uma <strong>abstracao</strong> que simplifica drasticamente nosso trabalho. Cada camada esconde a complexidade das camadas inferiores, permitindo que:</p>
-                    <ul>
-                        <li>Voce nao precise saber quais voltagens representam 1 ou 0 no cabo de rede</li>
-                        <li>Possa usar apenas a camada imediatamente abaixo (como usar <code>open()</code> sem instruir o disco manualmente)</li>
-                        <li>Foque apenas no que e relevante para sua aplicacao</li>
-                    </ul>
-                    <p>E como usar uma API de alto nivel: voce chama <code>fetch()</code> e nao precisa implementar TCP handshakes manualmente.</p>
+                <div class="stat-item">
+                    <div class="stat-value incorrect" id="incorrectCount">0</div>
+                    <div class="stat-label">Revisar</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value remaining" id="remainingCount">21</div>
+                    <div class="stat-label">Restantes</div>
                 </div>
             </div>
 
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q2: Quais sao as 3 camadas mais importantes para System Design Interviews e qual e a responsabilidade de cada uma?</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Camada</th>
-                                <th>Protocolo Principal</th>
-                                <th>Responsabilidade</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Layer 3 (Network)</strong></td>
-                                <td>IP</td>
-                                <td>Roteamento, enderecamento, quebra em pacotes, entrega "best-effort"</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Layer 4 (Transport)</strong></td>
-                                <td>TCP, UDP, QUIC</td>
-                                <td>Comunicacao end-to-end, confiabilidade, ordenacao, controle de fluxo</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Layer 7 (Application)</strong></td>
-                                <td>HTTP, DNS, WebSockets</td>
-                                <td>Protocolos de aplicacao que abstraem comunicacao para tipos especificos de dados</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p>A Layer 3 garante que os pacotes cheguem ao destino, Layer 4 adiciona garantias sobre <em>como</em> chegam, e Layer 7 define <em>o que</em> esta sendo comunicado.</p>
+            <div class="flashcard-progress">
+                <span id="currentIndex">1</span> / <span id="totalCards">21</span>
+                <div class="progress-bar-flashcard">
+                    <div class="fill" id="progressFillFlashcard"></div>
                 </div>
             </div>
-        </section>
 
-        <!-- Protocolos de Transporte -->
-        <section class="section">
-            <h2 class="section-title">🔌 Protocolos de Transporte: TCP vs UDP</h2>
+            <div class="flashcard" id="flashcard">
+                <div class="flashcard-category" id="cardCategory">Categoria</div>
+                <div class="flashcard-question" id="cardQuestion">Pergunta</div>
+                <button class="reveal-btn" id="revealBtn">Mostrar Resposta</button>
+                <div class="flashcard-answer" id="cardAnswer">Resposta</div>
+            </div>
 
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q3: Uma empresa de streaming de jogos esta decidindo entre TCP e UDP para transmitir video em tempo real. Qual protocolo voce recomendaria e por que?</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>UDP e a escolha correta</strong> para streaming de video em tempo real. Razoes:</p>
-                    <ol>
-                        <li><strong>Latencia e critica</strong> - Em jogos, milissegundos importam</li>
-                        <li><strong>Perda de pacotes e aceitavel</strong> - Um frame perdido e menos problematico que atraso</li>
-                        <li><strong>Sem overhead de handshake</strong> - Conexao mais rapida</li>
-                        <li><strong>Sem retransmissao</strong> - Nao faz sentido retransmitir um frame de 2 segundos atras</li>
-                    </ol>
-                    <p>O TCP causaria "buffering" constante porque tentaria retransmitir pacotes perdidos, enquanto UDP permite que o cliente simplesmente ignore frames perdidos e continue mostrando os mais recentes.</p>
-                    <div class="alert">
-                        <div class="alert-title">⚠️ Cuidado</div>
-                        <p>Se a aplicacao tambem tiver usuarios web (browser), WebRTC seria necessario pois browsers nao suportam UDP diretamente exceto via WebRTC.</p>
+            <div class="feedback-btns" id="feedbackBtns">
+                <button class="feedback-btn knew" id="knewBtn">
+                    <span>✓</span> Sabia
+                </button>
+                <button class="feedback-btn didnt-know" id="didntKnowBtn">
+                    <span>✗</span> Nao Sabia
+                </button>
+            </div>
+
+            <div class="flashcard-nav">
+                <button class="nav-btn" id="prevBtn">
+                    <span>←</span> Anterior
+                </button>
+                <button class="nav-btn" id="nextBtn">
+                    Proxima <span>→</span>
+                </button>
+            </div>
+
+            <div class="shortcuts-hint">
+                Atalhos: <kbd>Espaco</kbd> revelar | <kbd>←</kbd><kbd>→</kbd> navegar | <kbd>1</kbd> sabia | <kbd>2</kbd> nao sabia
+            </div>
+
+            <div class="completion-screen" id="completionScreen">
+                <h2>Parabens! Quiz Completo!</h2>
+                <p>Voce revisou todas as perguntas.</p>
+                <div class="completion-stats">
+                    <div class="completion-stat">
+                        <div class="completion-stat-value correct" id="finalCorrect">0</div>
+                        <div class="completion-stat-label">Acertei</div>
+                    </div>
+                    <div class="completion-stat">
+                        <div class="completion-stat-value incorrect" id="finalIncorrect">0</div>
+                        <div class="completion-stat-label">Para Revisar</div>
+                    </div>
+                    <div class="completion-stat">
+                        <div class="completion-stat-value" id="finalPercentage" style="color: var(--primary)">0%</div>
+                        <div class="completion-stat-label">Aproveitamento</div>
                     </div>
                 </div>
+                <button class="restart-btn" id="restartBtn">Revisar Novamente</button>
+                <button class="restart-btn" id="reviewMissedBtn" style="background: var(--danger); margin-left: 0.5rem;">Revisar Erradas</button>
             </div>
+        </div>
 
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q4: O que significa dizer que TCP e "connection-oriented" e por que isso importa?</span>
-                    <span class="toggle-icon">+</span>
+        <!-- List Mode -->
+        <div class="list-container" id="listMode">
+            <!-- Camadas de Rede e Modelo OSI -->
+            <section class="section">
+                <h2 class="section-title">📡 Camadas de Rede e Modelo OSI</h2>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-title">Q1: Por que o modelo de camadas e tao importante para desenvolvedores de aplicacoes?</span>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="answer">
+                        <p>O modelo de camadas funciona como uma <strong>abstracao</strong> que simplifica drasticamente nosso trabalho. Cada camada esconde a complexidade das camadas inferiores, permitindo que:</p>
+                        <ul>
+                            <li>Voce nao precise saber quais voltagens representam 1 ou 0 no cabo de rede</li>
+                            <li>Possa usar apenas a camada imediatamente abaixo (como usar <code>open()</code> sem instruir o disco manualmente)</li>
+                            <li>Foque apenas no que e relevante para sua aplicacao</li>
+                        </ul>
+                        <p>E como usar uma API de alto nivel: voce chama <code>fetch()</code> e nao precisa implementar TCP handshakes manualmente.</p>
+                    </div>
                 </div>
-                <div class="answer">
-                    <p>"Connection-oriented" significa que TCP estabelece uma <strong>conexao dedicada</strong> (chamada "stream") antes de transferir dados atraves do three-way handshake:</p>
-                    <pre><code>1. SYN     → Cliente solicita conexao
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-title">Q2: Quais sao as 3 camadas mais importantes para System Design Interviews e qual e a responsabilidade de cada uma?</span>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="answer">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Camada</th>
+                                    <th>Protocolo Principal</th>
+                                    <th>Responsabilidade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Layer 3 (Network)</strong></td>
+                                    <td>IP</td>
+                                    <td>Roteamento, enderecamento, quebra em pacotes, entrega "best-effort"</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Layer 4 (Transport)</strong></td>
+                                    <td>TCP, UDP, QUIC</td>
+                                    <td>Comunicacao end-to-end, confiabilidade, ordenacao, controle de fluxo</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Layer 7 (Application)</strong></td>
+                                    <td>HTTP, DNS, WebSockets</td>
+                                    <td>Protocolos de aplicacao que abstraem comunicacao para tipos especificos de dados</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>A Layer 3 garante que os pacotes cheguem ao destino, Layer 4 adiciona garantias sobre <em>como</em> chegam, e Layer 7 define <em>o que</em> esta sendo comunicado.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Protocolos de Transporte -->
+            <section class="section">
+                <h2 class="section-title">🔌 Protocolos de Transporte: TCP vs UDP</h2>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-title">Q3: Uma empresa de streaming de jogos esta decidindo entre TCP e UDP. Qual protocolo voce recomendaria e por que?</span>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>UDP e a escolha correta</strong> para streaming de video em tempo real. Razoes:</p>
+                        <ol>
+                            <li><strong>Latencia e critica</strong> - Em jogos, milissegundos importam</li>
+                            <li><strong>Perda de pacotes e aceitavel</strong> - Um frame perdido e menos problematico que atraso</li>
+                            <li><strong>Sem overhead de handshake</strong> - Conexao mais rapida</li>
+                            <li><strong>Sem retransmissao</strong> - Nao faz sentido retransmitir um frame de 2 segundos atras</li>
+                        </ol>
+                        <div class="alert">
+                            <div class="alert-title">⚠️ Cuidado</div>
+                            <p>Se a aplicacao tambem tiver usuarios web (browser), WebRTC seria necessario pois browsers nao suportam UDP diretamente exceto via WebRTC.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-title">Q4: O que significa dizer que TCP e "connection-oriented" e por que isso importa?</span>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="answer">
+                        <p>"Connection-oriented" significa que TCP estabelece uma <strong>conexao dedicada</strong> antes de transferir dados atraves do three-way handshake:</p>
+                        <pre><code>1. SYN     → Cliente solicita conexao
 2. SYN-ACK → Servidor reconhece e aceita
 3. ACK     → Cliente confirma estabelecimento</code></pre>
-                    <p><strong>Por que importa:</strong></p>
-                    <ul>
-                        <li><strong>Ordenacao garantida</strong>: Mensagens na mesma conexao chegam em ordem</li>
-                        <li><strong>Confiabilidade</strong>: Receptor confirma recebimento (ACK), se nao confirmar, ha retransmissao</li>
-                        <li><strong>Estado mantido</strong>: Servidor e cliente "sabem" um do outro durante a sessao</li>
-                        <li><strong>Controle de fluxo</strong>: Evita sobrecarregar o receptor</li>
-                    </ul>
-                    <p>E como uma ligacao telefonica: voce precisa "conectar" antes de falar, mas depois a comunicacao e continua e ordenada.</p>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q5: Complete a tabela comparativa TCP vs UDP</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Feature</th>
-                                <th>UDP</th>
-                                <th>TCP</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Conexao</td>
-                                <td>Connectionless</td>
-                                <td>Connection-oriented</td>
-                            </tr>
-                            <tr>
-                                <td>Confiabilidade</td>
-                                <td>Best-effort (pode perder)</td>
-                                <td>Entrega garantida</td>
-                            </tr>
-                            <tr>
-                                <td>Ordenacao</td>
-                                <td>Sem garantia de ordem</td>
-                                <td>Mantem ordem</td>
-                            </tr>
-                            <tr>
-                                <td>Header Size</td>
-                                <td>8 bytes</td>
-                                <td>20-60 bytes</td>
-                            </tr>
-                            <tr>
-                                <td>Use Cases</td>
-                                <td>Streaming, gaming, VoIP, DNS</td>
-                                <td>Todo o resto (web, APIs, etc.)</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p><strong>Insight</strong>: O header menor do UDP (8 vs 20-60 bytes) contribui para sua maior velocidade, mas o custo e a falta de garantias.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Protocolos de Aplicacao -->
-        <section class="section">
-            <h2 class="section-title">🌐 Protocolos de Aplicacao</h2>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q6: Por que HTTP e considerado "stateless" e por que isso e geralmente uma coisa boa para System Design?</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>Stateless significa</strong>: Cada requisicao e independente - o servidor nao precisa manter informacao sobre requisicoes anteriores.</p>
-                    <p><strong>Por que e bom:</strong></p>
-                    <ol>
-                        <li><strong>Escalabilidade horizontal</strong> - Qualquer servidor pode responder qualquer requisicao</li>
-                        <li><strong>Simplicidade</strong> - Servidores podem ser tratados como funcoes puras <code>f(request) → response</code></li>
-                        <li><strong>Resiliencia</strong> - Se um servidor cair, outro assume sem perda de "estado"</li>
-                        <li><strong>Load balancing facilitado</strong> - Round-robin funciona perfeitamente</li>
-                    </ol>
-                    <p><strong>Principio de design</strong>: Minimize a superficie de estado no seu sistema. Quanto menos estado, mais facil escalar e recuperar de falhas.</p>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q7: Voce esta projetando uma API para um app mobile que precisa mostrar perfil do usuario, posts recentes e lista de amigos em uma unica tela. Qual paradigma de API (REST, GraphQL, gRPC) voce escolheria e por que?</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>GraphQL e a melhor escolha</strong> para este cenario.</p>
-                    <p><strong>O problema com REST:</strong></p>
-                    <ul>
-                        <li><strong>Under-fetching</strong>: Precisaria de 3+ requests (GET /user, GET /posts, GET /friends)</li>
-                        <li><strong>Over-fetching</strong>: Cada endpoint retornaria campos desnecessarios</li>
-                        <li><strong>Latencia</strong>: Multiplos round-trips em conexao mobile = UX ruim</li>
-                    </ul>
-                    <p><strong>Por que GraphQL:</strong></p>
-                    <pre><code>query {
-  user(id: "123") {
-    name
-    avatar
-    posts(limit: 5) {
-      title
-      thumbnail
-    }
-    friends(limit: 10) {
-      name
-      avatar
-    }
-  }
-}</code></pre>
-                    <ul>
-                        <li><strong>Uma unica request</strong> busca exatamente o necessario</li>
-                        <li><strong>Frontend itera rapidamente</strong> sem depender de mudancas no backend</li>
-                        <li><strong>Menor payload</strong> = menos dados transferidos em rede movel</li>
-                    </ul>
-                    <p><strong>Quando NAO usar GraphQL:</strong></p>
-                    <ul>
-                        <li>Em entrevistas com requisitos fixos (nao ha iteracao)</li>
-                        <li>Quando otimizacao de queries especificas e mais importante</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q8: Por que gRPC nao e recomendado para APIs publicas/externas, mas e excelente para comunicacao interna entre servicos?</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>Para APIs internas (✅ gRPC brilha):</strong></p>
-                    <ul>
-                        <li><strong>Performance</strong>: Protocol Buffers sao ~10x mais eficientes que JSON</li>
-                        <li><strong>Tipagem forte</strong>: Erros pegos em compile-time, nao runtime</li>
-                        <li><strong>Streaming bidirecional</strong>: Suporte nativo</li>
-                        <li><strong>Geracao de codigo</strong>: Stubs para multiplas linguagens</li>
-                        <li><strong>Voce controla ambos os lados</strong>: Pode garantir compatibilidade</li>
-                    </ul>
-                    <p><strong>Para APIs externas (❌ Evitar gRPC):</strong></p>
-                    <ul>
-                        <li><strong>Protocolo binario</strong>: Dificil debugar com ferramentas comuns (curl, Postman)</li>
-                        <li><strong>Tooling imaturo</strong>: Menos suporte em diversas linguagens/frameworks</li>
-                        <li><strong>Browsers nao suportam</strong>: Nao funciona diretamente na web</li>
-                        <li><strong>Documentacao</strong>: REST com OpenAPI e mais acessivel para terceiros</li>
-                    </ul>
-                    <p><strong>Padrao recomendado:</strong></p>
-                    <pre><code>[Clientes externos] --REST/JSON--> [API Gateway] --gRPC--> [Microservicos internos]</code></pre>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q9: Qual a diferenca fundamental entre SSE (Server-Sent Events) e WebSockets? Quando usar cada um?</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Aspecto</th>
-                                <th>SSE</th>
-                                <th>WebSockets</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Direcao</strong></td>
-                                <td>Unidirecional (server → client)</td>
-                                <td>Bidirecional</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Protocolo</strong></td>
-                                <td>HTTP (hack elegante)</td>
-                                <td>Protocolo proprio (upgrade de HTTP)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Reconexao</strong></td>
-                                <td>Automatica (built-in)</td>
-                                <td>Manual</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Complexidade infra</strong></td>
-                                <td>Baixa</td>
-                                <td>Alta (firewalls, proxies, LBs)</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p><strong>Use SSE quando:</strong></p>
-                    <ul>
-                        <li>Apenas o servidor precisa "empurrar" dados</li>
-                        <li>Notificacoes, feeds em tempo real, precos de leilao</li>
-                        <li>Quer simplicidade operacional</li>
-                    </ul>
-                    <p><strong>Use WebSockets quando:</strong></p>
-                    <ul>
-                        <li>Comunicacao bidirecional de alta frequencia e necessaria</li>
-                        <li>Jogos multiplayer, chat, colaboracao em tempo real</li>
-                        <li>O overhead de infraestrutura e justificavel</li>
-                    </ul>
-                    <div class="alert">
-                        <div class="alert-title">⚠️ Alerta para entrevistas</div>
-                        <blockquote>"Launching into a WebSocket implementation without justifying why they are needed is a great way to get a thumbs down."</blockquote>
-                        <p>WebSockets requerem infraestrutura cara e conexoes stateful - so use quando realmente precisar!</p>
+                        <p><strong>Por que importa:</strong></p>
+                        <ul>
+                            <li><strong>Ordenacao garantida</strong>: Mensagens chegam em ordem</li>
+                            <li><strong>Confiabilidade</strong>: Receptor confirma recebimento (ACK)</li>
+                            <li><strong>Estado mantido</strong>: Servidor e cliente "sabem" um do outro</li>
+                            <li><strong>Controle de fluxo</strong>: Evita sobrecarregar o receptor</li>
+                        </ul>
                     </div>
                 </div>
-            </div>
 
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q10: O que e WebRTC e por que ele e "pain to get right"?</span>
-                    <span class="toggle-icon">+</span>
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-title">Q5: Complete a tabela comparativa TCP vs UDP</span>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="answer">
+                        <table>
+                            <thead>
+                                <tr><th>Feature</th><th>UDP</th><th>TCP</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Conexao</td><td>Connectionless</td><td>Connection-oriented</td></tr>
+                                <tr><td>Confiabilidade</td><td>Best-effort</td><td>Entrega garantida</td></tr>
+                                <tr><td>Ordenacao</td><td>Sem garantia</td><td>Mantem ordem</td></tr>
+                                <tr><td>Header Size</td><td>8 bytes</td><td>20-60 bytes</td></tr>
+                                <tr><td>Use Cases</td><td>Streaming, gaming, VoIP</td><td>Web, APIs</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="answer">
-                    <p><strong>WebRTC</strong> permite comunicacao <strong>peer-to-peer</strong> direta entre browsers, sem servidor intermediario para dados. Perfeito para videochamadas.</p>
-                    <p><strong>Por que e complexo:</strong></p>
-                    <p><strong>1. NAT Traversal</strong>: A maioria dos usuarios esta atras de NAT, nao aceitam conexoes de entrada</p>
-                    <ul>
-                        <li><strong>STUN</strong>: Tecnicas como "hole punching" para descobrir IP publico</li>
-                        <li><strong>TURN</strong>: Servidor relay como fallback quando P2P falha</li>
-                    </ul>
-                    <p><strong>2. Multiplas etapas de conexao:</strong></p>
-                    <pre><code>1. Conectar ao signaling server
-2. Obter IP publico via STUN
-3. Trocar info via signaling
-4. Estabelecer conexao P2P
-5. (Fallback para TURN se falhar)</code></pre>
-                    <p><strong>3. Unico protocolo L7 que usa UDP</strong> - mais rapido, mas menos confiavel</p>
-                    <p><strong>Quando usar:</strong></p>
-                    <ul>
-                        <li>✅ Videochamadas e conferencias</li>
-                        <li>✅ Audio em tempo real</li>
-                        <li>❌ Quase todo o resto (nao force P2P onde nao precisa!)</li>
-                    </ul>
-                    <blockquote>"I've seen more candidates go wildly off trail trying to design peer-to-peer systems using WebRTC than I have seen them successfully implement them."</blockquote>
+            </section>
+
+            <!-- More sections... -->
+            <section class="section">
+                <h2 class="section-title">🌐 Protocolos de Aplicacao</h2>
+
+                <div class="question-card">
+                    <div class="question-header">
+                        <span class="question-title">Q6: Por que HTTP e considerado "stateless"?</span>
+                        <span class="toggle-icon">+</span>
+                    </div>
+                    <div class="answer">
+                        <p><strong>Stateless significa</strong>: Cada requisicao e independente.</p>
+                        <p><strong>Por que e bom:</strong></p>
+                        <ol>
+                            <li><strong>Escalabilidade horizontal</strong> - Qualquer servidor pode responder</li>
+                            <li><strong>Simplicidade</strong> - Servidores como funcoes puras</li>
+                            <li><strong>Resiliencia</strong> - Se um servidor cair, outro assume</li>
+                            <li><strong>Load balancing facilitado</strong></li>
+                        </ol>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Load Balancing -->
-        <section class="section">
-            <h2 class="section-title">⚖️ Load Balancing</h2>
+            <!-- Cheat Sheet -->
+            <section class="section">
+                <h2 class="section-title">📋 Cheat Sheet</h2>
+                <details class="cheatsheet">
+                    <summary>Ver Cheat Sheet Completo</summary>
+                    <div class="cheatsheet-content">
+                        <h4>Protocolos de Transporte:</h4>
+                        <table>
+                            <thead><tr><th>Cenario</th><th>Escolha</th></tr></thead>
+                            <tbody>
+                                <tr><td>Default para tudo</td><td>TCP</td></tr>
+                                <tr><td>Gaming/Streaming</td><td>UDP</td></tr>
+                                <tr><td>Browsers + tempo real</td><td>WebRTC</td></tr>
+                            </tbody>
+                        </table>
+                        <h4>APIs:</h4>
+                        <table>
+                            <thead><tr><th>Cenario</th><th>Escolha</th></tr></thead>
+                            <tbody>
+                                <tr><td>API publica</td><td>REST</td></tr>
+                                <tr><td>Frontend flexivel</td><td>GraphQL</td></tr>
+                                <tr><td>Microservicos internos</td><td>gRPC</td></tr>
+                                <tr><td>Push notifications</td><td>SSE</td></tr>
+                                <tr><td>Chat bidirectional</td><td>WebSockets</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+            </section>
 
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q11: Explique a diferenca entre client-side load balancing e server-side (dedicated) load balancing. De um exemplo real de cada.</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>Client-Side Load Balancing:</strong> O cliente decide para qual servidor enviar a requisicao.</p>
-                    <p><em>Exemplo: Redis Cluster</em></p>
-                    <pre><code>1. Cliente pergunta a qualquer no sobre topologia do cluster
-2. Cliente recebe lista de nos e shards
-3. Cliente faz hash da key → determina shard → escolhe no
-4. Cliente conecta DIRETAMENTE ao no correto</code></pre>
-                    <ul>
-                        <li>✅ Muito rapido (sem hop adicional)</li>
-                        <li>✅ Eficiente para servicos internos (gRPC tem built-in)</li>
-                        <li>❌ Requer que cliente seja "inteligente"</li>
-                        <li>❌ Atualizacoes podem ser lentas para muitos clientes</li>
-                    </ul>
-                    <p><strong>Dedicated Load Balancer:</strong> Servidor/dispositivo intermediario toma a decisao.</p>
-                    <p><em>Exemplo: AWS ALB (Application Load Balancer)</em></p>
-                    <pre><code>Client → ALB → Backend Server</code></pre>
-                    <ul>
-                        <li>✅ Clientes simples</li>
-                        <li>✅ Atualizacoes instantaneas</li>
-                        <li>✅ Controle granular (routing por URL, headers, etc.)</li>
-                        <li>❌ Hop adicional em cada request</li>
-                    </ul>
-                    <p><strong>DNS como client-side LB:</strong> DNS retorna IPs em ordem rotacionada - cada cliente recebe ordem diferente, distribuindo carga naturalmente. Tambem evita SPOF: 2 LBs em regioes diferentes + DNS = alta disponibilidade.</p>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q12: Voce esta projetando um sistema com WebSockets para um chat em tempo real. Qual tipo de load balancer (L4 ou L7) voce usaria e por que?</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>L4 (Layer 4) Load Balancer</strong> e a escolha correta para WebSockets.</p>
-                    <p><strong>Por que:</strong></p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>L4 Load Balancer</th>
-                                <th>L7 Load Balancer</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Opera no nivel TCP/UDP</td>
-                                <td>Opera no nivel HTTP</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Mantem conexao persistente</strong> client↔server</td>
-                                <td>Termina conexao e cria nova</td>
-                            </tr>
-                            <tr>
-                                <td>Minima inspecao de pacotes</td>
-                                <td>Inspeciona conteudo (mais CPU)</td>
-                            </tr>
-                            <tr>
-                                <td>Ideal para protocolos stateful</td>
-                                <td>Ideal para HTTP stateless</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <p><strong>O problema com L7 para WebSockets:</strong> WebSocket precisa de conexao persistente. L7 load balancers terminam a conexao HTTP e criam novas conexoes para backends - isso "quebra" a semantica do WebSocket.</p>
-                    <p><strong>Algoritmo recomendado: Least Connections</strong> - Para conexoes persistentes (SSE, WebSocket), usar "Least Connections" evita que um servidor acumule gradualmente todas as conexoes ativas enquanto novos servidores ficam ociosos.</p>
-                    <p><strong>Excecao</strong>: Alguns L7 modernos (como AWS ALB) suportam WebSocket explicitamente, mas L4 continua sendo a escolha mais segura e performatica.</p>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q13: O que sao health checks e por que sao essenciais para alta disponibilidade?</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>Health Checks</strong> sao mecanismos que load balancers usam para verificar se backends estao saudaveis.</p>
-                    <p><strong>Como funcionam:</strong></p>
-                    <pre><code>Load Balancer --[periodic ping]--> Backend Server
-                                      |
-                    ┌─────────────────┴─────────────────┐
-                    ↓                                   ↓
-              Resposta OK                         Sem resposta/Erro
-                    ↓                                   ↓
-         Continua recebendo              Removido do pool (failover)
-              trafego</code></pre>
-                    <p><strong>Tipos de Health Check:</strong></p>
-                    <ul>
-                        <li><strong>TCP</strong>: Verifica se servidor aceita conexoes (simples, eficiente)</li>
-                        <li><strong>HTTP</strong>: Faz request e verifica status code (200 vs 500)</li>
-                        <li><strong>Custom</strong>: Endpoint especifico que verifica dependencias (DB, cache, etc.)</li>
-                    </ul>
-                    <p><strong>Por que sao essenciais:</strong></p>
-                    <ol>
-                        <li><strong>Failover automatico</strong>: Trafego desviado sem intervencao humana</li>
-                        <li><strong>Deteccao proativa</strong>: Identifica problemas antes dos usuarios</li>
-                        <li><strong>Graceful degradation</strong>: Sistema continua funcionando com capacidade reduzida</li>
-                    </ol>
-                    <p><strong>Configuracoes tipicas:</strong></p>
-                    <ul>
-                        <li>Intervalo: 5-30 segundos</li>
-                        <li>Threshold: 2-3 falhas consecutivas antes de remover</li>
-                        <li>Timeout: 2-5 segundos por check</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Regionalizacao e Latencia -->
-        <section class="section">
-            <h2 class="section-title">🌍 Regionalizacao e Latencia</h2>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q14: A velocidade da luz e uma limitacao real? Explique o impacto pratico para sistemas globais.</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>Sim, e uma limitacao fisica real e significativa!</strong></p>
-                    <p><strong>A matematica:</strong></p>
-                    <ul>
-                        <li>Luz em fibra optica: ~200,000 km/s (2/3 da velocidade no vacuo)</li>
-                        <li>Nova York ↔ Londres: ~5,600 km</li>
-                        <li>Round-trip minimo teorico: <strong>~56ms</strong> (so propagacao fisica!)</li>
-                    </ul>
-                    <p><strong>Impacto pratico:</strong></p>
-                    <pre><code>Latencia local (&lt;1ms):     [User] ↔ [Server na mesma cidade]
-Latencia continental (~30ms): [User] ↔ [Server em outro estado]
-Latencia intercontinental (~80ms+): [User] ↔ [Server em outro continente]</code></pre>
-                    <p><strong>Isso importa porque:</strong></p>
-                    <ul>
-                        <li>Cada query ao DB adiciona essa latencia</li>
-                        <li>Multiplos round-trips se acumulam rapidamente</li>
-                        <li>100ms+ e perceptivel para usuarios</li>
-                    </ul>
-                    <p><strong>Solucoes:</strong></p>
-                    <ol>
-                        <li><strong>CDNs</strong>: Cache na "edge" (centenas de cidades)</li>
-                        <li><strong>Regional Partitioning</strong>: Dados proximos de onde sao usados</li>
-                        <li><strong>Data Locality</strong>: Co-localizar computacao com dados</li>
-                    </ol>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q15: Usando o exemplo do Uber, explique como Regional Partitioning resolve problemas de latencia.</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>Insight chave do Uber:</strong></p>
-                    <blockquote>"Se estou em Miami, nunca vou querer um motorista que esta em Nova York."</blockquote>
-                    <p><strong>Arquitetura Regional:</strong></p>
-                    <pre><code>                    ┌─────────────────────────────────────┐
-                    │         GLOBAL COORDINATION         │
-                    │   (user accounts, payment, etc.)    │
-                    └─────────────────────────────────────┘
-                                     │
-        ┌────────────────────────────┼────────────────────────────┐
-        ↓                            ↓                            ↓
-┌───────────────┐          ┌───────────────┐          ┌───────────────┐
-│  NORTHEAST    │          │   SOUTHEAST   │          │   SOUTHWEST   │
-│ (NY datacenter)│         │ (Atlanta DC)  │          │  (LA DC)      │
-├───────────────┤          ├───────────────┤          ├───────────────┤
-│ - Drivers NY  │          │ - Drivers MIA │          │ - Drivers LA  │
-│ - Riders NY   │          │ - Riders MIA  │          │ - Riders LA   │
-│ - Local DB    │          │ - Local DB    │          │ - Local DB    │
-└───────────────┘          └───────────────┘          └───────────────┘</code></pre>
-                    <p><strong>Beneficios:</strong></p>
-                    <ol>
-                        <li><strong>Queries locais</strong>: Usuario em Miami → Servidor em Atlanta → DB em Atlanta</li>
-                        <li><strong>Escala reduzida</strong>: Milhoes globais → milhares por regiao</li>
-                        <li><strong>Latencia minima</strong>: Servidor e DB co-localizados</li>
-                        <li><strong>Isolamento de falhas</strong>: Problema em uma regiao nao afeta outras</li>
-                    </ol>
-                    <p><strong>Quando aplicar:</strong></p>
-                    <ul>
-                        <li>Dados tem localidade geografica natural</li>
-                        <li>Usuarios raramente precisam de dados de outras regioes</li>
-                        <li>Volume global e muito grande para um unico cluster</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Tratamento de Falhas -->
-        <section class="section">
-            <h2 class="section-title">🔧 Tratamento de Falhas</h2>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q16: O que significa "retry with exponential backoff" e por que o "jitter" e importante?</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>Exponential Backoff:</strong> Em vez de retry imediato, espere progressivamente mais:</p>
-                    <pre><code>Tentativa 1: falhou → espera 1s
-Tentativa 2: falhou → espera 2s
-Tentativa 3: falhou → espera 4s
-Tentativa 4: falhou → espera 8s
-...</code></pre>
-                    <p><strong>Por que exponencial:</strong></p>
-                    <ul>
-                        <li>Da tempo para sistema se recuperar</li>
-                        <li>Reduz carga durante problemas</li>
-                        <li>Evita "martelar" um servico em dificuldade</li>
-                    </ul>
-                    <p><strong>O problema sem jitter:</strong></p>
-                    <pre><code>1000 clientes falham simultaneamente
-Todos esperam 1s
-1000 clientes retentam simultaneamente ← THUNDERING HERD!
-Todos esperam 2s
-...</code></pre>
-                    <p><strong>Com Jitter (aleatoriedade):</strong></p>
-                    <pre><code>Cliente A: espera 0.8s
-Cliente B: espera 1.3s
-Cliente C: espera 0.9s
-...retries distribuidos ao longo do tempo</code></pre>
-                    <p><strong>Formula comum:</strong></p>
-                    <pre><code>sleep = min(cap, base * 2^attempt) + random(0, jitter)</code></pre>
-                    <p><strong>Em entrevistas</strong>: "Retry with exponential backoff and jitter" e a frase magica que interviewers esperam ouvir.</p>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q17: Explique o conceito de idempotencia e por que e crucial para sistemas distribuidos. De um exemplo de implementacao.</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>Idempotencia</strong>: Uma operacao que pode ser executada multiplas vezes produzindo o mesmo resultado.</p>
-                    <p><strong>Por que e crucial:</strong> Em sistemas distribuidos, nao sabemos se uma requisicao:</p>
-                    <ul>
-                        <li>Nunca chegou</li>
-                        <li>Chegou mas resposta se perdeu</li>
-                        <li>Foi processada parcialmente</li>
-                    </ul>
-                    <p>Sem idempotencia, retry pode causar:</p>
-                    <pre><code>POST /payment {amount: $10}  → Cobrou $10
-[timeout - resposta perdida]
-POST /payment {amount: $10}  → Cobrou $10 DE NOVO!
-Total: $20 😱</code></pre>
-                    <p><strong>Implementacao com Idempotency Key:</strong></p>
-                    <pre><code>POST /payment
-Headers:
-  Idempotency-Key: user123-2024-01-15-order456
-
-Body:
-  {amount: $10}</code></pre>
-                    <p><strong>No servidor:</strong></p>
-                    <pre><code>def process_payment(request):
-    key = request.headers['Idempotency-Key']
-
-    # Verifica se ja processou
-    existing = cache.get(key)
-    if existing:
-        return existing.result  # Retorna resultado anterior
-
-    # Marca como "em processamento"
-    cache.set(key, status="processing")
-
-    # Processa pagamento
-    result = charge_card(request.body.amount)
-
-    # Salva resultado
-    cache.set(key, result=result, status="done")
-
-    return result</code></pre>
-                    <p><strong>Operacoes naturalmente idempotentes:</strong></p>
-                    <ul>
-                        <li>GET (leitura nao altera estado)</li>
-                        <li>PUT (substituicao completa)</li>
-                        <li>DELETE (deletar algo ja deletado = OK)</li>
-                    </ul>
-                    <p><strong>Operacoes que precisam de cuidado:</strong></p>
-                    <ul>
-                        <li>POST (criacao)</li>
-                        <li>PATCH (incrementos: <code>balance += 10</code>)</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q18: O que e um Circuit Breaker e como ele previne falhas em cascata? Desenhe o diagrama de estados.</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>Circuit Breaker</strong> e um padrao inspirado em disjuntores eletricos que protege seu sistema quando dependencias falham.</p>
-                    <p><strong>O problema que resolve:</strong></p>
-                    <pre><code>Servico A → Servico B (morto)
-    ↓
-A espera timeout (30s) para cada request
-    ↓
-Requests acumulam em A
-    ↓
-A fica lento
-    ↓
-Clientes de A comecam a falhar
-    ↓
-CASCADING FAILURE 💥</code></pre>
-                    <p><strong>Diagrama de Estados:</strong></p>
-                    <pre><code>                    ┌─────────────────┐
-                    │     CLOSED      │ ← Estado normal
-                    │ (requests OK)   │
-                    └────────┬────────┘
-                             │
-                    falhas > threshold
-                             │
-                             ↓
-                    ┌─────────────────┐
-                    │      OPEN       │ ← Requests falham imediatamente
-                    │  (fail fast)    │   (sem tentar chamar servico)
-                    └────────┬────────┘
-                             │
-                    timeout expira
-                             │
-                             ↓
-                    ┌─────────────────┐
-                    │   HALF-OPEN     │ ← Permite 1 request de teste
-                    │ (testing...)    │
-                    └────────┬────────┘
-                             │
-              ┌──────────────┴──────────────┐
-              ↓                              ↓
-         sucesso                          falha
-              ↓                              ↓
-         → CLOSED                        → OPEN</code></pre>
-                    <p><strong>Beneficios:</strong></p>
-                    <ol>
-                        <li><strong>Fail Fast</strong>: Resposta imediata em vez de timeout longo</li>
-                        <li><strong>Reduz carga</strong>: Para de "martelar" servico em problemas</li>
-                        <li><strong>Self-healing</strong>: Testa recuperacao automaticamente</li>
-                        <li><strong>Isolamento</strong>: Falha em B nao derruba A</li>
-                    </ol>
-                    <p><strong>Onde aplicar:</strong></p>
-                    <ul>
-                        <li>Chamadas a APIs externas</li>
-                        <li>Conexoes de banco de dados</li>
-                        <li>Comunicacao entre microservicos</li>
-                        <li>Qualquer operacao de rede que pode falhar</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q19: Descreva o cenario "thundering herd" e como circuit breakers ajudam a preveni-lo.</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>Thundering Herd (Manada Trovejante):</strong> Quando muitos clientes tentam acessar um recurso simultaneamente apos ele se tornar disponivel (ou tentar se recuperar).</p>
-                    <p><strong>Cenario classico:</strong></p>
-                    <pre><code>1. Database cai
-2. 10,000 requests ficam esperando/retentando
-3. Database comeca a subir (1 instancia)
-4. 10,000 requests ATACAM a instancia nascente
-5. Instancia nao aguenta e cai
-6. GOTO 3 (loop infinito de morte)</code></pre>
-                    <p><strong>Como Circuit Breakers ajudam:</strong></p>
-                    <pre><code>ANTES (sem circuit breaker):
-[10,000 clients] --retry--> [DB tentando subir] 💀
-
-DEPOIS (com circuit breaker):
-[10,000 clients] --X BLOCKED (circuit OPEN)
-                           |
-              [Apenas 1 request de teste passa]
-                           |
-                    [DB sobe com calma]
-                           |
-              [Teste OK → Circuit CLOSES]
-                           |
-[Trafego liberado gradualmente]</code></pre>
-                    <p><strong>Tecnicas complementares:</strong></p>
-                    <ol>
-                        <li><strong>Jitter nos retries</strong>: Requests nao sincronizados</li>
-                        <li><strong>Rate limiting</strong>: Limite requests por segundo</li>
-                        <li><strong>Gradual ramp-up</strong>: Liberar trafego progressivamente</li>
-                        <li><strong>Bulkhead pattern</strong>: Isolar pools de conexao</li>
-                    </ol>
-                    <blockquote>"Experienced engineers who have spent time oncall will have a lot of war stories about cascading failures. It's a common problem that usually goes unnoticed until it bites you at 3am."</blockquote>
-                </div>
-            </div>
-        </section>
-
-        <!-- Questoes de Cenario -->
-        <section class="section">
-            <h2 class="section-title">🎯 Questoes de Cenario (Nivel Senior)</h2>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q20: Voce esta projetando o sistema de notificacoes em tempo real do Facebook (reacoes em lives, comentarios). Como voce arquitetaria considerando milhoes de usuarios simultaneos?</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>Analise do problema:</strong></p>
-                    <ul>
-                        <li>Milhoes de viewers simultaneos por live popular</li>
-                        <li>Reacoes sao "fire and forget" (perder algumas e OK)</li>
-                        <li>Alta frequencia de eventos</li>
-                        <li>Precisa de tempo real (baixa latencia)</li>
-                    </ul>
-                    <p><strong>Arquitetura proposta:</strong></p>
-                    <pre><code>┌─────────────────────────────────────────────────────────────┐
-│                        VIEWERS                               │
-│  [Browser/SSE] [Browser/SSE] [App/UDP] [App/UDP]            │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-┌──────────────────────────┴──────────────────────────────────┐
-│                    L7 LOAD BALANCER                          │
-│              (para browsers via HTTP/SSE)                    │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-┌──────────────────────────┴──────────────────────────────────┐
-│                 NOTIFICATION SERVERS                         │
-│   [Batching + Aggregation por live_id]                      │
-│   - Agrupa reacoes em janelas de 100ms                      │
-│   - Comprime: "❤️ x 5000, 😂 x 2000"                         │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-┌──────────────────────────┴──────────────────────────────────┐
-│              MESSAGE QUEUE (Kafka por live_id)               │
-└──────────────────────────┬──────────────────────────────────┘
-                           │
-┌──────────────────────────┴──────────────────────────────────┐
-│                 REACTION INGESTION                           │
-│   [Aceita UDP de apps, HTTP de browsers]                    │
-└─────────────────────────────────────────────────────────────┘</code></pre>
-                    <p><strong>Decisoes chave:</strong></p>
-                    <p><strong>1. Dual protocol:</strong></p>
-                    <ul>
-                        <li>Apps nativos: UDP (mais rapido, perda OK)</li>
-                        <li>Browsers: HTTP batched (limitacao da plataforma)</li>
-                    </ul>
-                    <p><strong>2. SSE para push</strong> (nao WebSocket):</p>
-                    <ul>
-                        <li>Unidirecional e suficiente (server → client)</li>
-                        <li>Menos overhead de infraestrutura</li>
-                        <li>Reconexao automatica</li>
-                    </ul>
-                    <p><strong>3. Batching agressivo:</strong></p>
-                    <ul>
-                        <li>Nao envia cada reacao individual</li>
-                        <li>Agrega por janela de tempo</li>
-                        <li>"5000 coracoes" e mais eficiente que 5000 mensagens</li>
-                    </ul>
-                    <p><strong>4. Regional partitioning:</strong></p>
-                    <ul>
-                        <li>Cada live tem "home region"</li>
-                        <li>Viewers conectam ao edge mais proximo</li>
-                        <li>Reacoes agregadas centralmente, distribuidas para edges</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="question-card">
-                <div class="question-header">
-                    <span class="question-title">Q21: "O que acontece quando voce digita google.com no browser e pressiona Enter?" - Explique o fluxo completo de networking.</span>
-                    <span class="toggle-icon">+</span>
-                </div>
-                <div class="answer">
-                    <p><strong>Fluxo completo:</strong></p>
-                    <pre><code>1. DNS RESOLUTION
-   Browser → DNS Resolver: "Qual IP de google.com?"
-   DNS Resolver → Browser: "142.250.80.46"
-
-2. TCP HANDSHAKE (3-way)
-   Client → Server: SYN (quero conectar)
-   Server → Client: SYN-ACK (aceito, tambem quero)
-   Client → Server: ACK (confirmado!)
-   [Conexao TCP estabelecida]
-
-3. TLS HANDSHAKE (para HTTPS)
-   - Troca de certificados
-   - Negociacao de cipher suite
-   - Estabelecimento de chaves simetricas
-   [Canal criptografado estabelecido]
-
-4. HTTP REQUEST
-   GET / HTTP/1.1
-   Host: google.com
-   User-Agent: Chrome/...
-   Accept: text/html
-
-5. SERVER PROCESSING
-   - Load balancer recebe
-   - Roteia para servidor disponivel
-   - Servidor processa e gera resposta
-   (⚡ Unica parte que a maioria dos SWEs controla!)
-
-6. HTTP RESPONSE
-   HTTP/1.1 200 OK
-   Content-Type: text/html
-   [HTML do Google]
-
-7. RENDERING
-   - Browser parseia HTML
-   - Requisita CSS, JS, imagens (mais requests!)
-   - Renderiza pagina
-
-8. TCP TEARDOWN (4-way) - quando conexao fecha
-   Client → Server: FIN
-   Server → Client: ACK
-   Server → Client: FIN
-   Client → Server: ACK</code></pre>
-                    <p><strong>Camadas envolvidas:</strong></p>
-                    <ul>
-                        <li><strong>L7 (Application)</strong>: HTTP, DNS, TLS</li>
-                        <li><strong>L4 (Transport)</strong>: TCP handshake/teardown</li>
-                        <li><strong>L3 (Network)</strong>: IP routing entre redes</li>
-                        <li><strong>L2/L1</strong>: Frames, sinais fisicos</li>
-                    </ul>
-                    <p><strong>Pergunta classica de entrevista</strong> - mostra entendimento end-to-end do stack de rede!</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Cheat Sheet -->
-        <section class="section">
-            <h2 class="section-title">📋 Resumo de Decisoes para Entrevistas</h2>
-
-            <details class="cheatsheet">
-                <summary>Ver Cheat Sheet Completo</summary>
-                <div class="cheatsheet-content">
-                    <h4>Protocolos de Transporte:</h4>
-                    <table>
-                        <thead>
-                            <tr><th>Cenario</th><th>Escolha</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Default para tudo</td><td>TCP</td></tr>
-                            <tr><td>Gaming/Streaming tempo real</td><td>UDP</td></tr>
-                            <tr><td>Browsers + tempo real</td><td>WebRTC (unico UDP em browser)</td></tr>
-                        </tbody>
-                    </table>
-
-                    <h4>APIs:</h4>
-                    <table>
-                        <thead>
-                            <tr><th>Cenario</th><th>Escolha</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>API publica/externa</td><td>REST</td></tr>
-                            <tr><td>Frontend flexivel/iterativo</td><td>GraphQL</td></tr>
-                            <tr><td>Microservicos internos + performance</td><td>gRPC</td></tr>
-                            <tr><td>Push notifications</td><td>SSE</td></tr>
-                            <tr><td>Chat/Colaboracao bidirectional</td><td>WebSockets</td></tr>
-                            <tr><td>Video/Audio calls</td><td>WebRTC</td></tr>
-                        </tbody>
-                    </table>
-
-                    <h4>Load Balancers:</h4>
-                    <table>
-                        <thead>
-                            <tr><th>Cenario</th><th>Escolha</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>HTTP APIs</td><td>L7</td></tr>
-                            <tr><td>WebSockets</td><td>L4</td></tr>
-                            <tr><td>Servicos internos controlados</td><td>Client-side</td></tr>
-                            <tr><td>Alto throughput</td><td>Hardware LB</td></tr>
-                        </tbody>
-                    </table>
-
-                    <h4>Algoritmos de LB:</h4>
-                    <table>
-                        <thead>
-                            <tr><th>Cenario</th><th>Escolha</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Stateless services</td><td>Round Robin / Random</td></tr>
-                            <tr><td>Conexoes persistentes (WS/SSE)</td><td>Least Connections</td></tr>
-                            <tr><td>Session affinity</td><td>IP Hash</td></tr>
-                        </tbody>
-                    </table>
-
-                    <h4>Tratamento de Falhas:</h4>
-                    <table>
-                        <thead>
-                            <tr><th>Problema</th><th>Solucao</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Requests falham as vezes</td><td>Retry com exponential backoff + jitter</td></tr>
-                            <tr><td>Retry pode duplicar acao</td><td>Idempotency keys</td></tr>
-                            <tr><td>Servico downstream morto</td><td>Circuit breaker</td></tr>
-                            <tr><td>Muitos clientes simultaneos</td><td>Rate limiting + bulkhead</td></tr>
-                        </tbody>
-                    </table>
-
-                    <h4>Latencia Global:</h4>
-                    <table>
-                        <thead>
-                            <tr><th>Problema</th><th>Solucao</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Assets estaticos</td><td>CDN</td></tr>
-                            <tr><td>Dados com localidade natural</td><td>Regional partitioning</td></tr>
-                            <tr><td>Dados globais, leitura pesada</td><td>Read replicas + cache distribuido</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </details>
-        </section>
-
-        <!-- Auto-avaliacao -->
-        <section class="section">
-            <h2 class="section-title">🏆 Auto-avaliacao</h2>
-
-            <div class="checklist">
-                <h3>Apos completar o quiz, avalie seu conhecimento:</h3>
-                <label><input type="checkbox" id="check1"> Consigo explicar as diferencas entre TCP e UDP e quando usar cada um</label>
-                <label><input type="checkbox" id="check2"> Entendo os tradeoffs entre REST, GraphQL e gRPC</label>
-                <label><input type="checkbox" id="check3"> Sei quando usar SSE vs WebSockets vs WebRTC</label>
-                <label><input type="checkbox" id="check4"> Compreendo L4 vs L7 load balancing e suas implicacoes</label>
-                <label><input type="checkbox" id="check5"> Posso explicar retry with exponential backoff e jitter</label>
-                <label><input type="checkbox" id="check6"> Entendo idempotencia e como implementa-la</label>
-                <label><input type="checkbox" id="check7"> Sei o que e um circuit breaker e quando aplica-lo</label>
-                <label><input type="checkbox" id="check8"> Consigo discutir estrategias de regionalizacao (CDN, partitioning)</label>
-
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                <p id="progressText" style="margin-top: 0.75rem; color: var(--text-muted); text-align: center;">0/8 completos</p>
-            </div>
-        </section>
-
-        <footer>
-            <p>Quiz criado com base no conteudo de Network Essentials para System Design Interviews</p>
-        </footer>
+            <footer>
+                <p>Quiz criado com base no conteudo de Network Essentials para System Design Interviews</p>
+            </footer>
+        </div>
     </div>
 
     <script>
-        // Toggle question cards
-        document.querySelectorAll('.question-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const card = header.parentElement;
-                card.classList.toggle('open');
+        // Quiz Data
+        const quizData = [
+            {
+                category: "📡 Camadas de Rede e Modelo OSI",
+                question: "Q1: Por que o modelo de camadas e tao importante para desenvolvedores de aplicacoes?",
+                answer: `<p>O modelo de camadas funciona como uma <strong>abstracao</strong> que simplifica drasticamente nosso trabalho. Cada camada esconde a complexidade das camadas inferiores, permitindo que:</p>
+                <ul>
+                    <li>Voce nao precise saber quais voltagens representam 1 ou 0 no cabo de rede</li>
+                    <li>Possa usar apenas a camada imediatamente abaixo (como usar <code>open()</code> sem instruir o disco manualmente)</li>
+                    <li>Foque apenas no que e relevante para sua aplicacao</li>
+                </ul>
+                <p>E como usar uma API de alto nivel: voce chama <code>fetch()</code> e nao precisa implementar TCP handshakes manualmente.</p>`
+            },
+            {
+                category: "📡 Camadas de Rede e Modelo OSI",
+                question: "Q2: Quais sao as 3 camadas mais importantes para System Design Interviews?",
+                answer: `<table>
+                    <thead><tr><th>Camada</th><th>Protocolo</th><th>Responsabilidade</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Layer 3 (Network)</strong></td><td>IP</td><td>Roteamento, enderecamento, entrega "best-effort"</td></tr>
+                        <tr><td><strong>Layer 4 (Transport)</strong></td><td>TCP, UDP, QUIC</td><td>Comunicacao end-to-end, confiabilidade, ordenacao</td></tr>
+                        <tr><td><strong>Layer 7 (Application)</strong></td><td>HTTP, DNS, WebSockets</td><td>Protocolos de aplicacao</td></tr>
+                    </tbody>
+                </table>
+                <p>Layer 3 garante que pacotes cheguem, Layer 4 adiciona garantias sobre <em>como</em> chegam, Layer 7 define <em>o que</em> e comunicado.</p>`
+            },
+            {
+                category: "🔌 TCP vs UDP",
+                question: "Q3: Uma empresa de streaming de jogos esta decidindo entre TCP e UDP. Qual voce recomendaria?",
+                answer: `<p><strong>UDP e a escolha correta</strong> para streaming em tempo real:</p>
+                <ol>
+                    <li><strong>Latencia e critica</strong> - Milissegundos importam em jogos</li>
+                    <li><strong>Perda de pacotes e aceitavel</strong> - Frame perdido < atraso</li>
+                    <li><strong>Sem overhead de handshake</strong></li>
+                    <li><strong>Sem retransmissao</strong> - Nao faz sentido retransmitir frame antigo</li>
+                </ol>
+                <div class="alert"><div class="alert-title">⚠️ Cuidado</div><p>Para browsers, WebRTC seria necessario (unico UDP em browser).</p></div>`
+            },
+            {
+                category: "🔌 TCP vs UDP",
+                question: "Q4: O que significa TCP ser 'connection-oriented'?",
+                answer: `<p>TCP estabelece uma <strong>conexao dedicada</strong> via three-way handshake:</p>
+                <pre><code>1. SYN     → Cliente solicita conexao
+2. SYN-ACK → Servidor aceita
+3. ACK     → Cliente confirma</code></pre>
+                <p><strong>Importa porque:</strong></p>
+                <ul>
+                    <li><strong>Ordenacao garantida</strong></li>
+                    <li><strong>Confiabilidade</strong> (ACK + retransmissao)</li>
+                    <li><strong>Estado mantido</strong> durante sessao</li>
+                    <li><strong>Controle de fluxo</strong></li>
+                </ul>`
+            },
+            {
+                category: "🔌 TCP vs UDP",
+                question: "Q5: Quais as principais diferencas entre TCP e UDP?",
+                answer: `<table>
+                    <thead><tr><th>Feature</th><th>UDP</th><th>TCP</th></tr></thead>
+                    <tbody>
+                        <tr><td>Conexao</td><td>Connectionless</td><td>Connection-oriented</td></tr>
+                        <tr><td>Confiabilidade</td><td>Best-effort</td><td>Entrega garantida</td></tr>
+                        <tr><td>Ordenacao</td><td>Sem garantia</td><td>Mantem ordem</td></tr>
+                        <tr><td>Header Size</td><td>8 bytes</td><td>20-60 bytes</td></tr>
+                        <tr><td>Use Cases</td><td>Streaming, gaming, VoIP, DNS</td><td>Web, APIs, etc.</td></tr>
+                    </tbody>
+                </table>`
+            },
+            {
+                category: "🌐 Protocolos de Aplicacao",
+                question: "Q6: Por que HTTP e 'stateless' e por que isso e bom?",
+                answer: `<p><strong>Stateless</strong>: Cada requisicao e independente.</p>
+                <p><strong>Beneficios:</strong></p>
+                <ol>
+                    <li><strong>Escalabilidade horizontal</strong> - Qualquer servidor responde</li>
+                    <li><strong>Simplicidade</strong> - Servidores como funcoes puras <code>f(request) → response</code></li>
+                    <li><strong>Resiliencia</strong> - Servidor cai, outro assume</li>
+                    <li><strong>Load balancing facilitado</strong> - Round-robin funciona</li>
+                </ol>
+                <p><strong>Principio</strong>: Minimize estado no sistema. Menos estado = mais facil escalar.</p>`
+            },
+            {
+                category: "🌐 Protocolos de Aplicacao",
+                question: "Q7: API mobile precisa mostrar perfil, posts e amigos em uma tela. REST, GraphQL ou gRPC?",
+                answer: `<p><strong>GraphQL e a melhor escolha.</strong></p>
+                <p><strong>Problema com REST:</strong></p>
+                <ul>
+                    <li><strong>Under-fetching</strong>: 3+ requests necessarios</li>
+                    <li><strong>Over-fetching</strong>: Campos desnecessarios</li>
+                    <li><strong>Latencia</strong>: Multiplos round-trips = UX ruim</li>
+                </ul>
+                <p><strong>GraphQL:</strong></p>
+                <pre><code>query {
+  user(id: "123") {
+    name, avatar
+    posts(limit: 5) { title }
+    friends(limit: 10) { name }
+  }
+}</code></pre>
+                <p>Uma request, exatamente os dados necessarios, menor payload.</p>`
+            },
+            {
+                category: "🌐 Protocolos de Aplicacao",
+                question: "Q8: Por que gRPC nao e recomendado para APIs publicas?",
+                answer: `<p><strong>APIs internas (✅ gRPC):</strong></p>
+                <ul>
+                    <li>Protocol Buffers ~10x mais eficientes</li>
+                    <li>Tipagem forte (erros em compile-time)</li>
+                    <li>Streaming bidirecional nativo</li>
+                    <li>Voce controla ambos os lados</li>
+                </ul>
+                <p><strong>APIs externas (❌ Evitar):</strong></p>
+                <ul>
+                    <li>Protocolo binario - dificil debugar</li>
+                    <li>Browsers nao suportam diretamente</li>
+                    <li>REST + OpenAPI mais acessivel</li>
+                </ul>
+                <pre><code>[Externos] --REST--> [API Gateway] --gRPC--> [Microservicos]</code></pre>`
+            },
+            {
+                category: "🌐 Protocolos de Aplicacao",
+                question: "Q9: Diferenca entre SSE e WebSockets? Quando usar cada?",
+                answer: `<table>
+                    <thead><tr><th>Aspecto</th><th>SSE</th><th>WebSockets</th></tr></thead>
+                    <tbody>
+                        <tr><td>Direcao</td><td>Unidirecional (server→client)</td><td>Bidirecional</td></tr>
+                        <tr><td>Protocolo</td><td>HTTP</td><td>Protocolo proprio</td></tr>
+                        <tr><td>Reconexao</td><td>Automatica</td><td>Manual</td></tr>
+                        <tr><td>Complexidade</td><td>Baixa</td><td>Alta</td></tr>
+                    </tbody>
+                </table>
+                <p><strong>SSE</strong>: Notificacoes, feeds, precos de leilao</p>
+                <p><strong>WebSockets</strong>: Chat, jogos multiplayer, colaboracao</p>
+                <blockquote>"Launching into WebSocket without justifying is a great way to get thumbs down."</blockquote>`
+            },
+            {
+                category: "🌐 Protocolos de Aplicacao",
+                question: "Q10: O que e WebRTC e por que e complexo?",
+                answer: `<p><strong>WebRTC</strong>: Comunicacao <strong>peer-to-peer</strong> entre browsers.</p>
+                <p><strong>Complexidade:</strong></p>
+                <p>1. <strong>NAT Traversal</strong>:</p>
+                <ul>
+                    <li>STUN: "hole punching" para descobrir IP</li>
+                    <li>TURN: Relay como fallback</li>
+                </ul>
+                <p>2. <strong>Multiplas etapas</strong>:</p>
+                <pre><code>1. Conectar ao signaling server
+2. Obter IP via STUN
+3. Trocar info
+4. Estabelecer P2P
+5. (Fallback TURN)</code></pre>
+                <p><strong>Usar para</strong>: ✅ Video/Audio calls | ❌ Quase todo resto</p>`
+            },
+            {
+                category: "⚖️ Load Balancing",
+                question: "Q11: Diferenca entre client-side e server-side load balancing?",
+                answer: `<p><strong>Client-Side</strong> (ex: Redis Cluster):</p>
+                <pre><code>1. Cliente pergunta topologia
+2. Cliente faz hash → escolhe no
+3. Conecta DIRETAMENTE</code></pre>
+                <p>✅ Rapido | ❌ Cliente "inteligente"</p>
+                <p><strong>Dedicated LB</strong> (ex: AWS ALB):</p>
+                <pre><code>Client → ALB → Backend</code></pre>
+                <p>✅ Clientes simples, controle granular | ❌ Hop adicional</p>
+                <p><strong>DNS como LB</strong>: Retorna IPs rotacionados, evita SPOF.</p>`
+            },
+            {
+                category: "⚖️ Load Balancing",
+                question: "Q12: WebSockets para chat - L4 ou L7 load balancer?",
+                answer: `<p><strong>L4 Load Balancer</strong> e a escolha correta.</p>
+                <table>
+                    <thead><tr><th>L4</th><th>L7</th></tr></thead>
+                    <tbody>
+                        <tr><td>Opera no TCP/UDP</td><td>Opera no HTTP</td></tr>
+                        <tr><td><strong>Mantem conexao persistente</strong></td><td>Termina e cria nova</td></tr>
+                        <tr><td>Minima inspecao</td><td>Inspeciona conteudo</td></tr>
+                        <tr><td>Ideal para stateful</td><td>Ideal para stateless</td></tr>
+                    </tbody>
+                </table>
+                <p><strong>Algoritmo</strong>: Least Connections (evita acumulo)</p>`
+            },
+            {
+                category: "⚖️ Load Balancing",
+                question: "Q13: O que sao health checks e por que sao essenciais?",
+                answer: `<p><strong>Health Checks</strong>: Verificam se backends estao saudaveis.</p>
+                <pre><code>LB --[ping]--> Server
+                      |
+         OK → recebe trafego
+         Erro → removido (failover)</code></pre>
+                <p><strong>Tipos</strong>: TCP, HTTP (status code), Custom (dependencias)</p>
+                <p><strong>Essenciais porque</strong>:</p>
+                <ol>
+                    <li>Failover automatico</li>
+                    <li>Deteccao proativa</li>
+                    <li>Graceful degradation</li>
+                </ol>
+                <p><strong>Config tipica</strong>: 5-30s intervalo, 2-3 falhas threshold</p>`
+            },
+            {
+                category: "🌍 Regionalizacao",
+                question: "Q14: A velocidade da luz e uma limitacao real?",
+                answer: `<p><strong>Sim!</strong></p>
+                <ul>
+                    <li>Luz em fibra: ~200,000 km/s</li>
+                    <li>NY ↔ Londres: ~5,600 km</li>
+                    <li>Round-trip minimo: <strong>~56ms</strong></li>
+                </ul>
+                <pre><code>Local (<1ms): mesma cidade
+Continental (~30ms): outro estado
+Intercontinental (~80ms+): outro continente</code></pre>
+                <p><strong>Solucoes</strong>:</p>
+                <ol>
+                    <li><strong>CDNs</strong>: Cache na edge</li>
+                    <li><strong>Regional Partitioning</strong></li>
+                    <li><strong>Data Locality</strong></li>
+                </ol>`
+            },
+            {
+                category: "🌍 Regionalizacao",
+                question: "Q15: Como Regional Partitioning resolve latencia? (exemplo Uber)",
+                answer: `<p><strong>Insight Uber</strong>: "Em Miami, nunca quero motorista de NY."</p>
+                <pre><code>      [GLOBAL: accounts, payment]
+                 |
+    ┌────────────┼────────────┐
+    ↓            ↓            ↓
+[NORTHEAST] [SOUTHEAST] [SOUTHWEST]
+ NY drivers  MIA drivers  LA drivers
+ Local DB    Local DB     Local DB</code></pre>
+                <p><strong>Beneficios</strong>:</p>
+                <ol>
+                    <li>Queries locais</li>
+                    <li>Escala reduzida por regiao</li>
+                    <li>Latencia minima (server + DB co-localizados)</li>
+                    <li>Isolamento de falhas</li>
+                </ol>`
+            },
+            {
+                category: "🔧 Tratamento de Falhas",
+                question: "Q16: O que e 'retry with exponential backoff' e por que jitter e importante?",
+                answer: `<p><strong>Exponential Backoff</strong>: Esperar progressivamente mais:</p>
+                <pre><code>Falhou → espera 1s
+Falhou → espera 2s
+Falhou → espera 4s...</code></pre>
+                <p><strong>Sem jitter</strong> (problema):</p>
+                <pre><code>1000 clientes falham
+Todos esperam 1s
+1000 retentam juntos ← THUNDERING HERD!</code></pre>
+                <p><strong>Com jitter</strong>:</p>
+                <pre><code>Cliente A: 0.8s | B: 1.3s | C: 0.9s
+...distribuidos no tempo</code></pre>
+                <p><strong>Formula</strong>: <code>min(cap, base * 2^attempt) + random(0, jitter)</code></p>`
+            },
+            {
+                category: "🔧 Tratamento de Falhas",
+                question: "Q17: O que e idempotencia e como implementar?",
+                answer: `<p><strong>Idempotencia</strong>: Operacao executada N vezes = mesmo resultado.</p>
+                <p><strong>Sem idempotencia</strong>:</p>
+                <pre><code>POST /payment $10 → Cobrou
+[timeout]
+POST /payment $10 → Cobrou DE NOVO! Total: $20</code></pre>
+                <p><strong>Com Idempotency Key</strong>:</p>
+                <pre><code>POST /payment
+Idempotency-Key: user123-order456
+{amount: $10}</code></pre>
+                <p><strong>Servidor</strong>: Verifica key no cache, retorna resultado anterior se existir.</p>
+                <p><strong>Naturalmente idempotentes</strong>: GET, PUT, DELETE</p>
+                <p><strong>Cuidado</strong>: POST, PATCH (incrementos)</p>`
+            },
+            {
+                category: "🔧 Tratamento de Falhas",
+                question: "Q18: O que e Circuit Breaker e como previne falhas em cascata?",
+                answer: `<p><strong>Circuit Breaker</strong>: Protege quando dependencias falham.</p>
+                <pre><code>       ┌─────────┐
+       │ CLOSED  │ ← Normal
+       └────┬────┘
+    falhas > threshold
+            ↓
+       ┌─────────┐
+       │  OPEN   │ ← Fail fast
+       └────┬────┘
+    timeout expira
+            ↓
+       ┌─────────┐
+       │HALF-OPEN│ ← Testa 1 request
+       └────┬────┘
+    sucesso → CLOSED
+    falha   → OPEN</code></pre>
+                <p><strong>Beneficios</strong>: Fail fast, reduz carga, self-healing, isolamento.</p>`
+            },
+            {
+                category: "🔧 Tratamento de Falhas",
+                question: "Q19: O que e 'thundering herd' e como prevenir?",
+                answer: `<p><strong>Thundering Herd</strong>: Muitos clientes atacam recurso recem-disponivel.</p>
+                <pre><code>1. DB cai
+2. 10,000 requests esperando
+3. DB sobe (1 instancia)
+4. 10,000 ATACAM
+5. Instancia cai
+6. GOTO 3 (loop de morte)</code></pre>
+                <p><strong>Circuit Breaker ajuda</strong>:</p>
+                <pre><code>[10,000 clients] --X BLOCKED
+[Apenas 1 teste passa]
+[DB sobe com calma]
+[Teste OK → trafego liberado]</code></pre>
+                <p><strong>Complementos</strong>: Jitter, rate limiting, gradual ramp-up, bulkhead.</p>`
+            },
+            {
+                category: "🎯 Cenario Senior",
+                question: "Q20: Como arquitetar notificacoes em tempo real do Facebook (reacoes em lives)?",
+                answer: `<p><strong>Requisitos</strong>: Milhoes simultaneos, fire-and-forget, tempo real.</p>
+                <pre><code>[VIEWERS: Browser/SSE, App/UDP]
+            ↓
+    [L7 LOAD BALANCER]
+            ↓
+  [NOTIFICATION SERVERS]
+  - Batching por live_id (100ms)
+  - Comprime: "❤️x5000, 😂x2000"
+            ↓
+     [KAFKA por live_id]
+            ↓
+   [REACTION INGESTION]</code></pre>
+                <p><strong>Decisoes</strong>:</p>
+                <ul>
+                    <li>Dual protocol: UDP (apps) + HTTP (browsers)</li>
+                    <li>SSE para push (nao WebSocket)</li>
+                    <li>Batching agressivo</li>
+                    <li>Regional partitioning</li>
+                </ul>`
+            },
+            {
+                category: "🎯 Cenario Senior",
+                question: "Q21: O que acontece quando voce digita google.com e pressiona Enter?",
+                answer: `<pre><code>1. DNS: "Qual IP de google.com?" → 142.250.80.46
+
+2. TCP HANDSHAKE:
+   SYN → SYN-ACK → ACK
+
+3. TLS HANDSHAKE:
+   Certificados + cipher + chaves
+
+4. HTTP REQUEST:
+   GET / HTTP/1.1
+
+5. SERVER PROCESSING ← Unica parte que SWEs controlam!
+
+6. HTTP RESPONSE:
+   200 OK + HTML
+
+7. RENDERING:
+   Parse HTML → CSS/JS/images → render
+
+8. TCP TEARDOWN:
+   FIN → ACK → FIN → ACK</code></pre>
+                <p><strong>Camadas</strong>: L7 (HTTP/DNS/TLS), L4 (TCP), L3 (IP), L2/L1 (fisico)</p>`
+            }
+        ];
+
+        // State
+        let currentIndex = 0;
+        let cards = [...quizData];
+        let correct = 0;
+        let incorrect = 0;
+        let answered = new Set();
+        let incorrectCards = [];
+        let isReviewingMissed = false;
+
+        // DOM Elements
+        const flashcardMode = document.getElementById('flashcardMode');
+        const listMode = document.getElementById('listMode');
+        const flashcard = document.getElementById('flashcard');
+        const cardCategory = document.getElementById('cardCategory');
+        const cardQuestion = document.getElementById('cardQuestion');
+        const cardAnswer = document.getElementById('cardAnswer');
+        const revealBtn = document.getElementById('revealBtn');
+        const feedbackBtns = document.getElementById('feedbackBtns');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentIndexEl = document.getElementById('currentIndex');
+        const totalCardsEl = document.getElementById('totalCards');
+        const progressFill = document.getElementById('progressFillFlashcard');
+        const correctCount = document.getElementById('correctCount');
+        const incorrectCount = document.getElementById('incorrectCount');
+        const remainingCount = document.getElementById('remainingCount');
+        const completionScreen = document.getElementById('completionScreen');
+        const filterText = document.getElementById('filterText');
+
+        // Functions
+        function updateCard() {
+            const card = cards[currentIndex];
+            cardCategory.textContent = card.category;
+            cardQuestion.textContent = card.question;
+            cardAnswer.innerHTML = card.answer;
+
+            // Reset state
+            cardAnswer.classList.remove('visible');
+            revealBtn.classList.remove('hidden');
+            feedbackBtns.classList.remove('visible');
+
+            // Update progress
+            currentIndexEl.textContent = currentIndex + 1;
+            totalCardsEl.textContent = cards.length;
+            progressFill.style.width = ((currentIndex + 1) / cards.length * 100) + '%';
+
+            // Update nav buttons
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === cards.length - 1;
+
+            // Update stats
+            correctCount.textContent = correct;
+            incorrectCount.textContent = incorrect;
+            remainingCount.textContent = cards.length - answered.size;
+        }
+
+        function revealAnswer() {
+            cardAnswer.classList.add('visible');
+            revealBtn.classList.add('hidden');
+            feedbackBtns.classList.add('visible');
+        }
+
+        function markKnew() {
+            if (!answered.has(currentIndex)) {
+                correct++;
+                answered.add(currentIndex);
+            }
+            goNext();
+        }
+
+        function markDidntKnow() {
+            if (!answered.has(currentIndex)) {
+                incorrect++;
+                answered.add(currentIndex);
+                if (!isReviewingMissed) {
+                    incorrectCards.push(cards[currentIndex]);
+                }
+            }
+            goNext();
+        }
+
+        function goNext() {
+            if (currentIndex < cards.length - 1) {
+                currentIndex++;
+                updateCard();
+            } else if (answered.size === cards.length) {
+                showCompletion();
+            }
+        }
+
+        function goPrev() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCard();
+            }
+        }
+
+        function shuffle() {
+            cards = [...cards].sort(() => Math.random() - 0.5);
+            currentIndex = 0;
+            answered.clear();
+            correct = 0;
+            incorrect = 0;
+            incorrectCards = [];
+            isReviewingMissed = false;
+            completionScreen.classList.remove('visible');
+            flashcard.style.display = 'flex';
+            updateCard();
+        }
+
+        function reset() {
+            cards = [...quizData];
+            currentIndex = 0;
+            answered.clear();
+            correct = 0;
+            incorrect = 0;
+            incorrectCards = [];
+            isReviewingMissed = false;
+            filterText.textContent = `Todas (${quizData.length})`;
+            completionScreen.classList.remove('visible');
+            flashcard.style.display = 'flex';
+            updateCard();
+        }
+
+        function showCompletion() {
+            flashcard.style.display = 'none';
+            feedbackBtns.classList.remove('visible');
+
+            document.getElementById('finalCorrect').textContent = correct;
+            document.getElementById('finalIncorrect').textContent = incorrect;
+            const percentage = Math.round((correct / cards.length) * 100);
+            document.getElementById('finalPercentage').textContent = percentage + '%';
+
+            completionScreen.classList.add('visible');
+
+            // Show/hide review missed button
+            document.getElementById('reviewMissedBtn').style.display =
+                incorrectCards.length > 0 ? 'inline-block' : 'none';
+        }
+
+        function reviewMissed() {
+            if (incorrectCards.length === 0) return;
+
+            cards = [...incorrectCards];
+            incorrectCards = [];
+            currentIndex = 0;
+            answered.clear();
+            correct = 0;
+            incorrect = 0;
+            isReviewingMissed = true;
+
+            filterText.textContent = `Revisao (${cards.length})`;
+            completionScreen.classList.remove('visible');
+            flashcard.style.display = 'flex';
+            updateCard();
+        }
+
+        function cycleFilter() {
+            // Simple filter cycling: All -> Categories...
+            // For now, just show all
+            reset();
+        }
+
+        // Mode switching
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const mode = btn.dataset.mode;
+                if (mode === 'flashcard') {
+                    flashcardMode.classList.add('active');
+                    listMode.classList.remove('active');
+                } else {
+                    flashcardMode.classList.remove('active');
+                    listMode.classList.add('active');
+                }
             });
         });
 
-        // Progress tracking
-        const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
+        // Event listeners
+        revealBtn.addEventListener('click', revealAnswer);
+        document.getElementById('knewBtn').addEventListener('click', markKnew);
+        document.getElementById('didntKnowBtn').addEventListener('click', markDidntKnow);
+        prevBtn.addEventListener('click', goPrev);
+        nextBtn.addEventListener('click', goNext);
+        document.getElementById('shuffleBtn').addEventListener('click', shuffle);
+        document.getElementById('resetBtn').addEventListener('click', reset);
+        document.getElementById('filterBtn').addEventListener('click', cycleFilter);
+        document.getElementById('restartBtn').addEventListener('click', reset);
+        document.getElementById('reviewMissedBtn').addEventListener('click', reviewMissed);
 
-        function updateProgress() {
-            const checked = document.querySelectorAll('.checklist input[type="checkbox"]:checked').length;
-            const total = checkboxes.length;
-            const percentage = (checked / total) * 100;
-
-            progressFill.style.width = percentage + '%';
-            progressText.textContent = `${checked}/${total} completos`;
-
-            if (checked === total) {
-                progressText.innerHTML = `<strong style="color: var(--success);">🎉 Voce esta pronto para System Design Interviews!</strong>`;
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (flashcardMode.classList.contains('active')) {
+                if (e.code === 'Space' && !cardAnswer.classList.contains('visible')) {
+                    e.preventDefault();
+                    revealAnswer();
+                } else if (e.code === 'ArrowRight') {
+                    goNext();
+                } else if (e.code === 'ArrowLeft') {
+                    goPrev();
+                } else if (e.key === '1' && cardAnswer.classList.contains('visible')) {
+                    markKnew();
+                } else if (e.key === '2' && cardAnswer.classList.contains('visible')) {
+                    markDidntKnow();
+                }
             }
+        });
 
-            // Save to localStorage
-            const state = Array.from(checkboxes).map(cb => cb.checked);
-            localStorage.setItem('quizProgress', JSON.stringify(state));
-        }
-
-        // Load saved progress
-        const savedProgress = localStorage.getItem('quizProgress');
-        if (savedProgress) {
-            const state = JSON.parse(savedProgress);
-            checkboxes.forEach((cb, i) => {
-                if (state[i]) cb.checked = true;
+        // List mode toggle
+        document.querySelectorAll('.question-header').forEach(header => {
+            header.addEventListener('click', () => {
+                header.parentElement.classList.toggle('open');
             });
-            updateProgress();
-        }
+        });
 
-        checkboxes.forEach(cb => cb.addEventListener('change', updateProgress));
+        // Initialize
+        updateCard();
     </script>
 </body>
 </html>
