@@ -1,5 +1,8 @@
+import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
+import { Copy, Check } from 'lucide-react'
+import { buildLLMContent, copyToClipboard } from '@/lib/copyToLLM'
 import type { QuizTopic } from '@/types/quiz'
 
 interface SidebarProps {
@@ -9,6 +12,18 @@ interface SidebarProps {
 }
 
 export function Sidebar({ topics, selectedTopicId, onSelectTopic }: SidebarProps) {
+  const [copiedId, setCopiedId] = useState<string | null>(null)
+
+  const handleCopyToLLM = async (e: React.MouseEvent, topic: QuizTopic) => {
+    e.stopPropagation()
+    const content = buildLLMContent(topic)
+    const success = await copyToClipboard(content)
+    if (success) {
+      setCopiedId(topic.id)
+      setTimeout(() => setCopiedId(null), 2000)
+    }
+  }
+
   return (
     <aside className="hidden md:flex w-72 flex-col border-r bg-card">
       <div className="p-6">
@@ -30,9 +45,8 @@ export function Sidebar({ topics, selectedTopicId, onSelectTopic }: SidebarProps
         <ul className="space-y-1">
           {topics.map((topic) => (
             <li key={topic.id}>
-              <button
+              <div
                 onClick={() => topic.isAvailable && onSelectTopic(topic.id)}
-                disabled={!topic.isAvailable}
                 className={cn(
                   "w-full flex items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors",
                   topic.isAvailable
@@ -56,12 +70,29 @@ export function Sidebar({ topics, selectedTopicId, onSelectTopic }: SidebarProps
                     }
                   </div>
                 </div>
-                {!topic.isAvailable && (
+                {topic.isAvailable ? (
+                  <button
+                    onClick={(e) => handleCopyToLLM(e, topic)}
+                    className={cn(
+                      "p-1.5 rounded-md transition-colors",
+                      selectedTopicId === topic.id
+                        ? "hover:bg-primary-foreground/20"
+                        : "hover:bg-muted"
+                    )}
+                    title="Copiar para LLM"
+                  >
+                    {copiedId === topic.id ? (
+                      <Check className="h-4 w-4 text-green-500" />
+                    ) : (
+                      <Copy className="h-4 w-4" />
+                    )}
+                  </button>
+                ) : (
                   <Badge variant="warning" className="text-[10px] px-1.5 py-0">
                     SOON
                   </Badge>
                 )}
-              </button>
+              </div>
             </li>
           ))}
         </ul>
