@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Network Essentials - Quiz Q/A</title>
+    <title>Study Quizzes - System Design Interview Prep</title>
     <style>
         :root {
             --primary: #6366f1;
@@ -33,10 +33,190 @@
             min-height: 100vh;
         }
 
+        /* Layout com Sidebar */
+        .app-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--bg-card);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sidebar-subtitle {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .sidebar-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            padding-left: 0.5rem;
+        }
+
+        .quiz-list {
+            list-style: none;
+        }
+
+        .quiz-item {
+            margin-bottom: 0.25rem;
+        }
+
+        .quiz-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .quiz-link:hover {
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .quiz-link.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .quiz-link.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .quiz-icon {
+            font-size: 1.25rem;
+        }
+
+        .quiz-info {
+            flex: 1;
+        }
+
+        .quiz-name {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .quiz-count {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .quiz-link.active .quiz-count {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .quiz-badge {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            background: var(--warning);
+            color: #000;
+            font-weight: 600;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 2rem 1rem;
+        }
+
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1001;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay.open {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .container {
+                padding-top: 4rem;
+            }
         }
 
         header {
@@ -731,11 +911,99 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Network Essentials - Quiz Q/A</h1>
-            <p>Conceitos de networking essenciais para System Design Interviews</p>
-        </header>
+    <!-- Mobile menu toggle -->
+    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <!-- Overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    📚 Study Quizzes
+                </div>
+                <div class="sidebar-subtitle">System Design Interview Prep</div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Quizzes Disponíveis</div>
+                <ul class="quiz-list">
+                    <li class="quiz-item">
+                        <div class="quiz-link active" data-quiz="network-essentials">
+                            <span class="quiz-icon">🌐</span>
+                            <div class="quiz-info">
+                                <div class="quiz-name">Network Essentials</div>
+                                <div class="quiz-count">21 perguntas</div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="quiz-item">
+                        <div class="quiz-link disabled" data-quiz="databases">
+                            <span class="quiz-icon">🗄️</span>
+                            <div class="quiz-info">
+                                <div class="quiz-name">Databases</div>
+                                <div class="quiz-count">Em breve</div>
+                            </div>
+                            <span class="quiz-badge">SOON</span>
+                        </div>
+                    </li>
+                    <li class="quiz-item">
+                        <div class="quiz-link disabled" data-quiz="caching">
+                            <span class="quiz-icon">⚡</span>
+                            <div class="quiz-info">
+                                <div class="quiz-name">Caching</div>
+                                <div class="quiz-count">Em breve</div>
+                            </div>
+                            <span class="quiz-badge">SOON</span>
+                        </div>
+                    </li>
+                    <li class="quiz-item">
+                        <div class="quiz-link disabled" data-quiz="distributed-systems">
+                            <span class="quiz-icon">🔗</span>
+                            <div class="quiz-info">
+                                <div class="quiz-name">Distributed Systems</div>
+                                <div class="quiz-count">Em breve</div>
+                            </div>
+                            <span class="quiz-badge">SOON</span>
+                        </div>
+                    </li>
+                    <li class="quiz-item">
+                        <div class="quiz-link disabled" data-quiz="api-design">
+                            <span class="quiz-icon">🔌</span>
+                            <div class="quiz-info">
+                                <div class="quiz-name">API Design</div>
+                                <div class="quiz-count">Em breve</div>
+                            </div>
+                            <span class="quiz-badge">SOON</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Recursos</div>
+                <ul class="quiz-list">
+                    <li class="quiz-item">
+                        <a class="quiz-link" href="https://github.com" target="_blank" style="text-decoration: none;">
+                            <span class="quiz-icon">📖</span>
+                            <div class="quiz-info">
+                                <div class="quiz-name">Documentação</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <header>
+                    <h1>Network Essentials - Quiz Q/A</h1>
+                    <p>Conceitos de networking essenciais para System Design Interviews</p>
+                </header>
 
         <!-- Mode Switcher -->
         <div class="mode-switcher">
@@ -904,11 +1172,11 @@
                             <li><strong>Latência é crítica</strong> - Em jogos, milissegundos importam</li>
                             <li><strong>Perda de pacotes é aceitável</strong> - Um frame perdido é menos problemático que atraso</li>
                             <li><strong>Sem overhead de handshake</strong> - Conexão mais rápida</li>
-                            <li><strong>Sem retransmissão</strong> - Não faz sentido retransmitir um frame de 2 segundos atras</li>
+                            <li><strong>Sem retransmissão</strong> - Não faz sentido retransmitir um frame de 2 segundos atrás</li>
                         </ol>
                         <div class="alert">
                             <div class="alert-title">⚠️ Cuidado</div>
-                            <p>Se a aplicação também tiver usuarios web (browser), WebRTC seria necessário pois browsers não suportam UDP diretamente exceto via WebRTC.</p>
+                            <p>Se a aplicação também tiver usuários web (browser), WebRTC seria necessário pois browsers não suportam UDP diretamente exceto via WebRTC.</p>
                         </div>
                     </div>
                 </div>
@@ -998,7 +1266,7 @@
                             <tbody>
                                 <tr><td>API pública</td><td>REST</td></tr>
                                 <tr><td>Frontend flexível</td><td>GraphQL</td></tr>
-                                <tr><td>Microservicos internos</td><td>gRPC</td></tr>
+                                <tr><td>Microserviços internos</td><td>gRPC</td></tr>
                                 <tr><td>Push notifications</td><td>SSE</td></tr>
                                 <tr><td>Chat bidirectional</td><td>WebSockets</td></tr>
                             </tbody>
@@ -1122,7 +1390,7 @@
                     <li>Protocol Buffers ~10x mais eficientes</li>
                     <li>Tipagem forte (erros em compile-time)</li>
                     <li>Streaming bidirecional nativo</li>
-                    <li>Voce controla ambos os lados</li>
+                    <li>Você controla ambos os lados</li>
                 </ul>
                 <p><strong>APIs externas (❌ Evitar):</strong></p>
                 <ul>
@@ -1130,7 +1398,7 @@
                     <li>Browsers não suportam diretamente</li>
                     <li>REST + OpenAPI mais acessível</li>
                 </ul>
-                <pre><code>[Externos] --REST--> [API Gateway] --gRPC--> [Microservicos]</code></pre>`
+                <pre><code>[Externos] --REST--> [API Gateway] --gRPC--> [Microserviços]</code></pre>`
             },
             {
                 category: "🌐 Protocolos de Aplicação",
@@ -1202,7 +1470,7 @@
                       |
          OK → recebe tráfego
          Erro → removido (failover)</code></pre>
-                <p><strong>Tipos</strong>: TCP, HTTP (status code), Custom (dependencias)</p>
+                <p><strong>Tipos</strong>: TCP, HTTP (status code), Custom (dependências)</p>
                 <p><strong>Essenciais porque</strong>:</p>
                 <ol>
                     <li>Failover automático</li>
@@ -1284,7 +1552,7 @@ Idempotency-Key: user123-order456
             {
                 category: "🔧 Tratamento de Falhas",
                 question: "Q18: O que é Circuit Breaker e como previne falhas em cascata?",
-                answer: `<p><strong>Circuit Breaker</strong>: Protege quando dependências falhamencias falham.</p>
+                answer: `<p><strong>Circuit Breaker</strong>: Protege quando dependências falham.</p>
                 <pre><code>       ┌─────────┐
        │ CLOSED  │ ← Normal
        └────┬────┘
@@ -1589,6 +1857,38 @@ Idempotency-Key: user123-order456
 
         // Initialize
         updateCard();
+
+        // Sidebar toggle for mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            sidebarOverlay.classList.toggle('open');
+        });
+
+        sidebarOverlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('open');
+        });
+
+        // Quiz selection (for future use)
+        document.querySelectorAll('.quiz-link:not(.disabled)').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelectorAll('.quiz-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                // Close sidebar on mobile after selection
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                    sidebarOverlay.classList.remove('open');
+                }
+            });
+        });
     </script>
+            </div>
+        </main>
+    </div>
 </body>
 </html>
