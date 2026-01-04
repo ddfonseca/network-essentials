@@ -791,7 +791,7 @@
                     <span>✓</span> Sabia
                 </button>
                 <button class="feedback-btn didnt-know" id="didntKnowBtn">
-                    <span>✗</span> Nao Sabia
+                    <span>✗</span> Não Sabia
                 </button>
             </div>
 
@@ -800,17 +800,17 @@
                     <span>←</span> Anterior
                 </button>
                 <button class="nav-btn" id="nextBtn">
-                    Proxima <span>→</span>
+                    Próxima <span>→</span>
                 </button>
             </div>
 
             <div class="shortcuts-hint">
-                Atalhos: <kbd>Espaco</kbd> revelar | <kbd>←</kbd><kbd>→</kbd> navegar | <kbd>1</kbd> sabia | <kbd>2</kbd> nao sabia
+                Atalhos: <kbd>Espaço</kbd> revelar | <kbd>←</kbd><kbd>→</kbd> navegar | <kbd>1</kbd> sabia | <kbd>2</kbd> não sabia
             </div>
 
             <div class="completion-screen" id="completionScreen">
-                <h2>Parabens! Quiz Completo!</h2>
-                <p>Voce revisou todas as perguntas.</p>
+                <h2>Parabéns! Quiz Completo!</h2>
+                <p>Você revisou todas as perguntas.</p>
                 <div class="completion-stats">
                     <div class="completion-stat">
                         <div class="completion-stat-value correct" id="finalCorrect">0</div>
@@ -838,23 +838,23 @@
 
                 <div class="question-card">
                     <div class="question-header">
-                        <span class="question-title">Q1: Por que o modelo de camadas e tao importante para desenvolvedores de aplicacoes?</span>
+                        <span class="question-title">Q1: Por que o modelo de camadas é tão importante para desenvolvedores de aplicações?</span>
                         <span class="toggle-icon">+</span>
                     </div>
                     <div class="answer">
-                        <p>O modelo de camadas funciona como uma <strong>abstracao</strong> que simplifica drasticamente nosso trabalho. Cada camada esconde a complexidade das camadas inferiores, permitindo que:</p>
+                        <p>O modelo de camadas funciona como uma <strong>abstração</strong> que simplifica drasticamente nosso trabalho. Cada camada esconde a complexidade das camadas inferiores, permitindo que:</p>
                         <ul>
-                            <li>Voce nao precise saber quais voltagens representam 1 ou 0 no cabo de rede</li>
+                            <li>Você não precise saber quais voltagens representam 1 ou 0 no cabo de rede</li>
                             <li>Possa usar apenas a camada imediatamente abaixo (como usar <code>open()</code> sem instruir o disco manualmente)</li>
-                            <li>Foque apenas no que e relevante para sua aplicacao</li>
+                            <li>Foque apenas no que é relevante para sua aplicação</li>
                         </ul>
-                        <p>E como usar uma API de alto nivel: voce chama <code>fetch()</code> e nao precisa implementar TCP handshakes manualmente.</p>
+                        <p>É como usar uma API de alto nível: você chama <code>fetch()</code> e não precisa implementar TCP handshakes manualmente.</p>
                     </div>
                 </div>
 
                 <div class="question-card">
                     <div class="question-header">
-                        <span class="question-title">Q2: Quais sao as 3 camadas mais importantes para System Design Interviews e qual e a responsabilidade de cada uma?</span>
+                        <span class="question-title">Q2: Quais são as 3 camadas mais importantes para System Design Interviews e qual é a responsabilidade de cada uma?</span>
                         <span class="toggle-icon">+</span>
                     </div>
                     <div class="answer">
@@ -870,21 +870,21 @@
                                 <tr>
                                     <td><strong>Layer 3 (Network)</strong></td>
                                     <td>IP</td>
-                                    <td>Roteamento, enderecamento, quebra em pacotes, entrega "best-effort"</td>
+                                    <td>Roteamento, endereçamento, quebra em pacotes, entrega "best-effort"</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Layer 4 (Transport)</strong></td>
                                     <td>TCP, UDP, QUIC</td>
-                                    <td>Comunicacao end-to-end, confiabilidade, ordenacao, controle de fluxo</td>
+                                    <td>Comunicação end-to-end, confiabilidade, ordenação, controle de fluxo</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Layer 7 (Application)</strong></td>
                                     <td>HTTP, DNS, WebSockets</td>
-                                    <td>Protocolos de aplicacao que abstraem comunicacao para tipos especificos de dados</td>
+                                    <td>Protocolos de aplicação que abstraem comunicação para tipos específicos de dados</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <p>A Layer 3 garante que os pacotes cheguem ao destino, Layer 4 adiciona garantias sobre <em>como</em> chegam, e Layer 7 define <em>o que</em> esta sendo comunicado.</p>
+                        <p>A Layer 3 garante que os pacotes cheguem ao destino, Layer 4 adiciona garantias sobre <em>como</em> chegam, e Layer 7 define <em>o que</em> está sendo comunicado.</p>
                     </div>
                 </div>
             </section>
@@ -895,37 +895,37 @@
 
                 <div class="question-card">
                     <div class="question-header">
-                        <span class="question-title">Q3: Uma empresa de streaming de jogos esta decidindo entre TCP e UDP. Qual protocolo voce recomendaria e por que?</span>
+                        <span class="question-title">Q3: Uma empresa de streaming de jogos está decidindo entre TCP e UDP. Qual protocolo você recomendaria e por que?</span>
                         <span class="toggle-icon">+</span>
                     </div>
                     <div class="answer">
-                        <p><strong>UDP e a escolha correta</strong> para streaming de video em tempo real. Razoes:</p>
+                        <p><strong>UDP é a escolha correta</strong> para streaming de vídeo em tempo real. Razões:</p>
                         <ol>
-                            <li><strong>Latencia e critica</strong> - Em jogos, milissegundos importam</li>
-                            <li><strong>Perda de pacotes e aceitavel</strong> - Um frame perdido e menos problematico que atraso</li>
-                            <li><strong>Sem overhead de handshake</strong> - Conexao mais rapida</li>
-                            <li><strong>Sem retransmissao</strong> - Nao faz sentido retransmitir um frame de 2 segundos atras</li>
+                            <li><strong>Latência é crítica</strong> - Em jogos, milissegundos importam</li>
+                            <li><strong>Perda de pacotes é aceitável</strong> - Um frame perdido é menos problemático que atraso</li>
+                            <li><strong>Sem overhead de handshake</strong> - Conexão mais rápida</li>
+                            <li><strong>Sem retransmissão</strong> - Não faz sentido retransmitir um frame de 2 segundos atras</li>
                         </ol>
                         <div class="alert">
                             <div class="alert-title">⚠️ Cuidado</div>
-                            <p>Se a aplicacao tambem tiver usuarios web (browser), WebRTC seria necessario pois browsers nao suportam UDP diretamente exceto via WebRTC.</p>
+                            <p>Se a aplicação também tiver usuarios web (browser), WebRTC seria necessário pois browsers não suportam UDP diretamente exceto via WebRTC.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="question-card">
                     <div class="question-header">
-                        <span class="question-title">Q4: O que significa dizer que TCP e "connection-oriented" e por que isso importa?</span>
+                        <span class="question-title">Q4: O que significa dizer que TCP é "connection-oriented" e por que isso importa?</span>
                         <span class="toggle-icon">+</span>
                     </div>
                     <div class="answer">
-                        <p>"Connection-oriented" significa que TCP estabelece uma <strong>conexao dedicada</strong> antes de transferir dados atraves do three-way handshake:</p>
-                        <pre><code>1. SYN     → Cliente solicita conexao
+                        <p>"Connection-oriented" significa que TCP estabelece uma <strong>conexão dedicada</strong> antes de transferir dados através do three-way handshake:</p>
+                        <pre><code>1. SYN     → Cliente solicita conexão
 2. SYN-ACK → Servidor reconhece e aceita
 3. ACK     → Cliente confirma estabelecimento</code></pre>
                         <p><strong>Por que importa:</strong></p>
                         <ul>
-                            <li><strong>Ordenacao garantida</strong>: Mensagens chegam em ordem</li>
+                            <li><strong>Ordenação garantida</strong>: Mensagens chegam em ordem</li>
                             <li><strong>Confiabilidade</strong>: Receptor confirma recebimento (ACK)</li>
                             <li><strong>Estado mantido</strong>: Servidor e cliente "sabem" um do outro</li>
                             <li><strong>Controle de fluxo</strong>: Evita sobrecarregar o receptor</li>
@@ -944,9 +944,9 @@
                                 <tr><th>Feature</th><th>UDP</th><th>TCP</th></tr>
                             </thead>
                             <tbody>
-                                <tr><td>Conexao</td><td>Connectionless</td><td>Connection-oriented</td></tr>
+                                <tr><td>Conexão</td><td>Connectionless</td><td>Connection-oriented</td></tr>
                                 <tr><td>Confiabilidade</td><td>Best-effort</td><td>Entrega garantida</td></tr>
-                                <tr><td>Ordenacao</td><td>Sem garantia</td><td>Mantem ordem</td></tr>
+                                <tr><td>Ordenação</td><td>Sem garantia</td><td>Mantém ordem</td></tr>
                                 <tr><td>Header Size</td><td>8 bytes</td><td>20-60 bytes</td></tr>
                                 <tr><td>Use Cases</td><td>Streaming, gaming, VoIP</td><td>Web, APIs</td></tr>
                             </tbody>
@@ -957,21 +957,21 @@
 
             <!-- More sections... -->
             <section class="section">
-                <h2 class="section-title">🌐 Protocolos de Aplicacao</h2>
+                <h2 class="section-title">🌐 Protocolos de Aplicação</h2>
 
                 <div class="question-card">
                     <div class="question-header">
-                        <span class="question-title">Q6: Por que HTTP e considerado "stateless"?</span>
+                        <span class="question-title">Q6: Por que HTTP é considerado "stateless"?</span>
                         <span class="toggle-icon">+</span>
                     </div>
                     <div class="answer">
-                        <p><strong>Stateless significa</strong>: Cada requisicao e independente.</p>
-                        <p><strong>Por que e bom:</strong></p>
+                        <p><strong>Stateless significa</strong>: Cada requisição é independente.</p>
+                        <p><strong>Por que é bom:</strong></p>
                         <ol>
                             <li><strong>Escalabilidade horizontal</strong> - Qualquer servidor pode responder</li>
-                            <li><strong>Simplicidade</strong> - Servidores como funcoes puras</li>
-                            <li><strong>Resiliencia</strong> - Se um servidor cair, outro assume</li>
-                            <li><strong>Load balancing facilitado</strong></li>
+                            <li><strong>Simplicidade</strong> - Servidores como funções puras</li>
+                            <li><strong>Resiliência</strong> - Se um servidor cair, outro assume</li>
+                            <li><strong>Load balancing fácilitado</strong></li>
                         </ol>
                     </div>
                 </div>
@@ -985,7 +985,7 @@
                     <div class="cheatsheet-content">
                         <h4>Protocolos de Transporte:</h4>
                         <table>
-                            <thead><tr><th>Cenario</th><th>Escolha</th></tr></thead>
+                            <thead><tr><th>Cenário</th><th>Escolha</th></tr></thead>
                             <tbody>
                                 <tr><td>Default para tudo</td><td>TCP</td></tr>
                                 <tr><td>Gaming/Streaming</td><td>UDP</td></tr>
@@ -994,10 +994,10 @@
                         </table>
                         <h4>APIs:</h4>
                         <table>
-                            <thead><tr><th>Cenario</th><th>Escolha</th></tr></thead>
+                            <thead><tr><th>Cenário</th><th>Escolha</th></tr></thead>
                             <tbody>
-                                <tr><td>API publica</td><td>REST</td></tr>
-                                <tr><td>Frontend flexivel</td><td>GraphQL</td></tr>
+                                <tr><td>API pública</td><td>REST</td></tr>
+                                <tr><td>Frontend flexível</td><td>GraphQL</td></tr>
                                 <tr><td>Microservicos internos</td><td>gRPC</td></tr>
                                 <tr><td>Push notifications</td><td>SSE</td></tr>
                                 <tr><td>Chat bidirectional</td><td>WebSockets</td></tr>
@@ -1008,7 +1008,7 @@
             </section>
 
             <footer>
-                <p>Quiz criado com base no conteudo de Network Essentials para System Design Interviews</p>
+                <p>Quiz criado com base no conteúdo de Network Essentials para System Design Interviews</p>
             </footer>
         </div>
     </div>
@@ -1018,91 +1018,91 @@
         const quizData = [
             {
                 category: "📡 Camadas de Rede e Modelo OSI",
-                question: "Q1: Por que o modelo de camadas e tao importante para desenvolvedores de aplicacoes?",
-                answer: `<p>O modelo de camadas funciona como uma <strong>abstracao</strong> que simplifica drasticamente nosso trabalho. Cada camada esconde a complexidade das camadas inferiores, permitindo que:</p>
+                question: "Q1: Por que o modelo de camadas é tão importante para desenvolvedores de aplicações?",
+                answer: `<p>O modelo de camadas funciona como uma <strong>abstração</strong> que simplifica drasticamente nosso trabalho. Cada camada esconde a complexidade das camadas inferiores, permitindo que:</p>
                 <ul>
-                    <li>Voce nao precise saber quais voltagens representam 1 ou 0 no cabo de rede</li>
+                    <li>Você não precise saber quais voltagens representam 1 ou 0 no cabo de rede</li>
                     <li>Possa usar apenas a camada imediatamente abaixo (como usar <code>open()</code> sem instruir o disco manualmente)</li>
-                    <li>Foque apenas no que e relevante para sua aplicacao</li>
+                    <li>Foque apenas no que é relevante para sua aplicação</li>
                 </ul>
-                <p>E como usar uma API de alto nivel: voce chama <code>fetch()</code> e nao precisa implementar TCP handshakes manualmente.</p>`
+                <p>É como usar uma API de alto nível: você chama <code>fetch()</code> e não precisa implementar TCP handshakes manualmente.</p>`
             },
             {
                 category: "📡 Camadas de Rede e Modelo OSI",
-                question: "Q2: Quais sao as 3 camadas mais importantes para System Design Interviews?",
+                question: "Q2: Quais são as 3 camadas mais importantes para System Design Interviews?",
                 answer: `<table>
                     <thead><tr><th>Camada</th><th>Protocolo</th><th>Responsabilidade</th></tr></thead>
                     <tbody>
-                        <tr><td><strong>Layer 3 (Network)</strong></td><td>IP</td><td>Roteamento, enderecamento, entrega "best-effort"</td></tr>
-                        <tr><td><strong>Layer 4 (Transport)</strong></td><td>TCP, UDP, QUIC</td><td>Comunicacao end-to-end, confiabilidade, ordenacao</td></tr>
-                        <tr><td><strong>Layer 7 (Application)</strong></td><td>HTTP, DNS, WebSockets</td><td>Protocolos de aplicacao</td></tr>
+                        <tr><td><strong>Layer 3 (Network)</strong></td><td>IP</td><td>Roteamento, endereçamento, entrega "best-effort"</td></tr>
+                        <tr><td><strong>Layer 4 (Transport)</strong></td><td>TCP, UDP, QUIC</td><td>Comunicação end-to-end, confiabilidade, ordenação</td></tr>
+                        <tr><td><strong>Layer 7 (Application)</strong></td><td>HTTP, DNS, WebSockets</td><td>Protocolos de aplicação</td></tr>
                     </tbody>
                 </table>
-                <p>Layer 3 garante que pacotes cheguem, Layer 4 adiciona garantias sobre <em>como</em> chegam, Layer 7 define <em>o que</em> e comunicado.</p>`
+                <p>Layer 3 garante que pacotes cheguem, Layer 4 adiciona garantias sobre <em>como</em> chegam, Layer 7 define <em>o que</em> é comunicado.</p>`
             },
             {
                 category: "🔌 TCP vs UDP",
-                question: "Q3: Uma empresa de streaming de jogos esta decidindo entre TCP e UDP. Qual voce recomendaria?",
-                answer: `<p><strong>UDP e a escolha correta</strong> para streaming em tempo real:</p>
+                question: "Q3: Uma empresa de streaming de jogos está decidindo entre TCP e UDP. Qual você recomendaria?",
+                answer: `<p><strong>UDP é a escolha correta</strong> para streaming em tempo real:</p>
                 <ol>
-                    <li><strong>Latencia e critica</strong> - Milissegundos importam em jogos</li>
-                    <li><strong>Perda de pacotes e aceitavel</strong> - Frame perdido < atraso</li>
+                    <li><strong>Latência é crítica</strong> - Milissegundos importam em jogos</li>
+                    <li><strong>Perda de pacotes é aceitável</strong> - Frame perdido < atraso</li>
                     <li><strong>Sem overhead de handshake</strong></li>
-                    <li><strong>Sem retransmissao</strong> - Nao faz sentido retransmitir frame antigo</li>
+                    <li><strong>Sem retransmissão</strong> - Não faz sentido retransmitir frame antigo</li>
                 </ol>
-                <div class="alert"><div class="alert-title">⚠️ Cuidado</div><p>Para browsers, WebRTC seria necessario (unico UDP em browser).</p></div>`
+                <div class="alert"><div class="alert-title">⚠️ Cuidado</div><p>Para browsers, WebRTC seria necessário (único UDP em browser).</p></div>`
             },
             {
                 category: "🔌 TCP vs UDP",
                 question: "Q4: O que significa TCP ser 'connection-oriented'?",
-                answer: `<p>TCP estabelece uma <strong>conexao dedicada</strong> via three-way handshake:</p>
-                <pre><code>1. SYN     → Cliente solicita conexao
+                answer: `<p>TCP estabelece uma <strong>conexão dedicada</strong> via three-way handshake:</p>
+                <pre><code>1. SYN     → Cliente solicita conexão
 2. SYN-ACK → Servidor aceita
 3. ACK     → Cliente confirma</code></pre>
                 <p><strong>Importa porque:</strong></p>
                 <ul>
-                    <li><strong>Ordenacao garantida</strong></li>
-                    <li><strong>Confiabilidade</strong> (ACK + retransmissao)</li>
-                    <li><strong>Estado mantido</strong> durante sessao</li>
+                    <li><strong>Ordenação garantida</strong></li>
+                    <li><strong>Confiabilidade</strong> (ACK + retransmissão)</li>
+                    <li><strong>Estado mantido</strong> durante sessão</li>
                     <li><strong>Controle de fluxo</strong></li>
                 </ul>`
             },
             {
                 category: "🔌 TCP vs UDP",
-                question: "Q5: Quais as principais diferencas entre TCP e UDP?",
+                question: "Q5: Quais as principais diferenças entre TCP e UDP?",
                 answer: `<table>
                     <thead><tr><th>Feature</th><th>UDP</th><th>TCP</th></tr></thead>
                     <tbody>
-                        <tr><td>Conexao</td><td>Connectionless</td><td>Connection-oriented</td></tr>
+                        <tr><td>Conexão</td><td>Connectionless</td><td>Connection-oriented</td></tr>
                         <tr><td>Confiabilidade</td><td>Best-effort</td><td>Entrega garantida</td></tr>
-                        <tr><td>Ordenacao</td><td>Sem garantia</td><td>Mantem ordem</td></tr>
+                        <tr><td>Ordenação</td><td>Sem garantia</td><td>Mantém ordem</td></tr>
                         <tr><td>Header Size</td><td>8 bytes</td><td>20-60 bytes</td></tr>
                         <tr><td>Use Cases</td><td>Streaming, gaming, VoIP, DNS</td><td>Web, APIs, etc.</td></tr>
                     </tbody>
                 </table>`
             },
             {
-                category: "🌐 Protocolos de Aplicacao",
-                question: "Q6: Por que HTTP e 'stateless' e por que isso e bom?",
-                answer: `<p><strong>Stateless</strong>: Cada requisicao e independente.</p>
-                <p><strong>Beneficios:</strong></p>
+                category: "🌐 Protocolos de Aplicação",
+                question: "Q6: Por que HTTP é 'stateless' e por que isso é bom?",
+                answer: `<p><strong>Stateless</strong>: Cada requisição é independente.</p>
+                <p><strong>Benefícios:</strong></p>
                 <ol>
                     <li><strong>Escalabilidade horizontal</strong> - Qualquer servidor responde</li>
-                    <li><strong>Simplicidade</strong> - Servidores como funcoes puras <code>f(request) → response</code></li>
-                    <li><strong>Resiliencia</strong> - Servidor cai, outro assume</li>
-                    <li><strong>Load balancing facilitado</strong> - Round-robin funciona</li>
+                    <li><strong>Simplicidade</strong> - Servidores como funções puras <code>f(request) → response</code></li>
+                    <li><strong>Resiliência</strong> - Servidor cai, outro assume</li>
+                    <li><strong>Load balancing fácilitado</strong> - Round-robin funciona</li>
                 </ol>
-                <p><strong>Principio</strong>: Minimize estado no sistema. Menos estado = mais facil escalar.</p>`
+                <p><strong>Princípio</strong>: Minimize estado no sistema. Menos estado = mais fácil escalar.</p>`
             },
             {
-                category: "🌐 Protocolos de Aplicacao",
+                category: "🌐 Protocolos de Aplicação",
                 question: "Q7: API mobile precisa mostrar perfil, posts e amigos em uma tela. REST, GraphQL ou gRPC?",
-                answer: `<p><strong>GraphQL e a melhor escolha.</strong></p>
+                answer: `<p><strong>GraphQL é a melhor escolha.</strong></p>
                 <p><strong>Problema com REST:</strong></p>
                 <ul>
-                    <li><strong>Under-fetching</strong>: 3+ requests necessarios</li>
-                    <li><strong>Over-fetching</strong>: Campos desnecessarios</li>
-                    <li><strong>Latencia</strong>: Multiplos round-trips = UX ruim</li>
+                    <li><strong>Under-fetching</strong>: 3+ requests necessários</li>
+                    <li><strong>Over-fetching</strong>: Campos desnecessários</li>
+                    <li><strong>Latência</strong>: Multiplos round-trips = UX ruim</li>
                 </ul>
                 <p><strong>GraphQL:</strong></p>
                 <pre><code>query {
@@ -1112,11 +1112,11 @@
     friends(limit: 10) { name }
   }
 }</code></pre>
-                <p>Uma request, exatamente os dados necessarios, menor payload.</p>`
+                <p>Uma request, exatamente os dados necessários, menor payload.</p>`
             },
             {
-                category: "🌐 Protocolos de Aplicacao",
-                question: "Q8: Por que gRPC nao e recomendado para APIs publicas?",
+                category: "🌐 Protocolos de Aplicação",
+                question: "Q8: Por que gRPC não é recomendado para APIs públicas?",
                 answer: `<p><strong>APIs internas (✅ gRPC):</strong></p>
                 <ul>
                     <li>Protocol Buffers ~10x mais eficientes</li>
@@ -1126,39 +1126,39 @@
                 </ul>
                 <p><strong>APIs externas (❌ Evitar):</strong></p>
                 <ul>
-                    <li>Protocolo binario - dificil debugar</li>
-                    <li>Browsers nao suportam diretamente</li>
-                    <li>REST + OpenAPI mais acessivel</li>
+                    <li>Protocolo binário - difícil debugar</li>
+                    <li>Browsers não suportam diretamente</li>
+                    <li>REST + OpenAPI mais acessível</li>
                 </ul>
                 <pre><code>[Externos] --REST--> [API Gateway] --gRPC--> [Microservicos]</code></pre>`
             },
             {
-                category: "🌐 Protocolos de Aplicacao",
-                question: "Q9: Diferenca entre SSE e WebSockets? Quando usar cada?",
+                category: "🌐 Protocolos de Aplicação",
+                question: "Q9: Diferença entre SSE e WebSockets? Quando usar cada?",
                 answer: `<table>
                     <thead><tr><th>Aspecto</th><th>SSE</th><th>WebSockets</th></tr></thead>
                     <tbody>
-                        <tr><td>Direcao</td><td>Unidirecional (server→client)</td><td>Bidirecional</td></tr>
-                        <tr><td>Protocolo</td><td>HTTP</td><td>Protocolo proprio</td></tr>
-                        <tr><td>Reconexao</td><td>Automatica</td><td>Manual</td></tr>
+                        <tr><td>Direção</td><td>Unidirecional (server→client)</td><td>Bidirecional</td></tr>
+                        <tr><td>Protocolo</td><td>HTTP</td><td>Protocolo próprio</td></tr>
+                        <tr><td>Reconexão</td><td>Automática</td><td>Manual</td></tr>
                         <tr><td>Complexidade</td><td>Baixa</td><td>Alta</td></tr>
                     </tbody>
                 </table>
-                <p><strong>SSE</strong>: Notificacoes, feeds, precos de leilao</p>
-                <p><strong>WebSockets</strong>: Chat, jogos multiplayer, colaboracao</p>
+                <p><strong>SSE</strong>: Notificações, feeds, preços de leilão</p>
+                <p><strong>WebSockets</strong>: Chat, jogos multiplayer, colaboração</p>
                 <blockquote>"Launching into WebSocket without justifying is a great way to get thumbs down."</blockquote>`
             },
             {
-                category: "🌐 Protocolos de Aplicacao",
-                question: "Q10: O que e WebRTC e por que e complexo?",
-                answer: `<p><strong>WebRTC</strong>: Comunicacao <strong>peer-to-peer</strong> entre browsers.</p>
+                category: "🌐 Protocolos de Aplicação",
+                question: "Q10: O que é WebRTC e por que é complexo?",
+                answer: `<p><strong>WebRTC</strong>: Comunicação <strong>peer-to-peer</strong> entre browsers.</p>
                 <p><strong>Complexidade:</strong></p>
                 <p>1. <strong>NAT Traversal</strong>:</p>
                 <ul>
                     <li>STUN: "hole punching" para descobrir IP</li>
                     <li>TURN: Relay como fallback</li>
                 </ul>
-                <p>2. <strong>Multiplas etapas</strong>:</p>
+                <p>2. <strong>Múltiplas etapas</strong>:</p>
                 <pre><code>1. Conectar ao signaling server
 2. Obter IP via STUN
 3. Trocar info
@@ -1168,12 +1168,12 @@
             },
             {
                 category: "⚖️ Load Balancing",
-                question: "Q11: Diferenca entre client-side e server-side load balancing?",
+                question: "Q11: Diferença entre client-side e server-side load balancing?",
                 answer: `<p><strong>Client-Side</strong> (ex: Redis Cluster):</p>
                 <pre><code>1. Cliente pergunta topologia
 2. Cliente faz hash → escolhe no
 3. Conecta DIRETAMENTE</code></pre>
-                <p>✅ Rapido | ❌ Cliente "inteligente"</p>
+                <p>✅ Rápido | ❌ Cliente "inteligente"</p>
                 <p><strong>Dedicated LB</strong> (ex: AWS ALB):</p>
                 <pre><code>Client → ALB → Backend</code></pre>
                 <p>✅ Clientes simples, controle granular | ❌ Hop adicional</p>
@@ -1182,48 +1182,48 @@
             {
                 category: "⚖️ Load Balancing",
                 question: "Q12: WebSockets para chat - L4 ou L7 load balancer?",
-                answer: `<p><strong>L4 Load Balancer</strong> e a escolha correta.</p>
+                answer: `<p><strong>L4 Load Balancer</strong> é a escolha correta.</p>
                 <table>
                     <thead><tr><th>L4</th><th>L7</th></tr></thead>
                     <tbody>
                         <tr><td>Opera no TCP/UDP</td><td>Opera no HTTP</td></tr>
-                        <tr><td><strong>Mantem conexao persistente</strong></td><td>Termina e cria nova</td></tr>
-                        <tr><td>Minima inspecao</td><td>Inspeciona conteudo</td></tr>
+                        <tr><td><strong>Mantém conexão persistente</strong></td><td>Termina e cria nova</td></tr>
+                        <tr><td>Mínima inspeção</td><td>Inspeciona conteúdo</td></tr>
                         <tr><td>Ideal para stateful</td><td>Ideal para stateless</td></tr>
                     </tbody>
                 </table>
-                <p><strong>Algoritmo</strong>: Least Connections (evita acumulo)</p>`
+                <p><strong>Algoritmo</strong>: Least Connections (evita acúmulo)</p>`
             },
             {
                 category: "⚖️ Load Balancing",
-                question: "Q13: O que sao health checks e por que sao essenciais?",
-                answer: `<p><strong>Health Checks</strong>: Verificam se backends estao saudaveis.</p>
+                question: "Q13: O que são health checks e por que são essenciais?",
+                answer: `<p><strong>Health Checks</strong>: Verificam se backends estão saudáveis.</p>
                 <pre><code>LB --[ping]--> Server
                       |
-         OK → recebe trafego
+         OK → recebe tráfego
          Erro → removido (failover)</code></pre>
                 <p><strong>Tipos</strong>: TCP, HTTP (status code), Custom (dependencias)</p>
                 <p><strong>Essenciais porque</strong>:</p>
                 <ol>
-                    <li>Failover automatico</li>
-                    <li>Deteccao proativa</li>
+                    <li>Failover automático</li>
+                    <li>Detecção proativa</li>
                     <li>Graceful degradation</li>
                 </ol>
-                <p><strong>Config tipica</strong>: 5-30s intervalo, 2-3 falhas threshold</p>`
+                <p><strong>Config típica</strong>: 5-30s intervalo, 2-3 falhas threshold</p>`
             },
             {
-                category: "🌍 Regionalizacao",
-                question: "Q14: A velocidade da luz e uma limitacao real?",
+                category: "🌍 Regionalização",
+                question: "Q14: A velocidade da luz é uma limitação real?",
                 answer: `<p><strong>Sim!</strong></p>
                 <ul>
                     <li>Luz em fibra: ~200,000 km/s</li>
                     <li>NY ↔ Londres: ~5,600 km</li>
-                    <li>Round-trip minimo: <strong>~56ms</strong></li>
+                    <li>Round-trip mínimo: <strong>~56ms</strong></li>
                 </ul>
                 <pre><code>Local (<1ms): mesma cidade
 Continental (~30ms): outro estado
 Intercontinental (~80ms+): outro continente</code></pre>
-                <p><strong>Solucoes</strong>:</p>
+                <p><strong>Soluções</strong>:</p>
                 <ol>
                     <li><strong>CDNs</strong>: Cache na edge</li>
                     <li><strong>Regional Partitioning</strong></li>
@@ -1231,8 +1231,8 @@ Intercontinental (~80ms+): outro continente</code></pre>
                 </ol>`
             },
             {
-                category: "🌍 Regionalizacao",
-                question: "Q15: Como Regional Partitioning resolve latencia? (exemplo Uber)",
+                category: "🌍 Regionalização",
+                question: "Q15: Como Regional Partitioning resolve latência? (exemplo Uber)",
                 answer: `<p><strong>Insight Uber</strong>: "Em Miami, nunca quero motorista de NY."</p>
                 <pre><code>      [GLOBAL: accounts, payment]
                  |
@@ -1241,17 +1241,17 @@ Intercontinental (~80ms+): outro continente</code></pre>
 [NORTHEAST] [SOUTHEAST] [SOUTHWEST]
  NY drivers  MIA drivers  LA drivers
  Local DB    Local DB     Local DB</code></pre>
-                <p><strong>Beneficios</strong>:</p>
+                <p><strong>Benefícios</strong>:</p>
                 <ol>
                     <li>Queries locais</li>
-                    <li>Escala reduzida por regiao</li>
-                    <li>Latencia minima (server + DB co-localizados)</li>
+                    <li>Escala reduzida por região</li>
+                    <li>Latência mínima (server + DB co-localizados)</li>
                     <li>Isolamento de falhas</li>
                 </ol>`
             },
             {
                 category: "🔧 Tratamento de Falhas",
-                question: "Q16: O que e 'retry with exponential backoff' e por que jitter e importante?",
+                question: "Q16: O que é 'retry with exponential backoff' e por que jitter é importante?",
                 answer: `<p><strong>Exponential Backoff</strong>: Esperar progressivamente mais:</p>
                 <pre><code>Falhou → espera 1s
 Falhou → espera 2s
@@ -1262,14 +1262,14 @@ Todos esperam 1s
 1000 retentam juntos ← THUNDERING HERD!</code></pre>
                 <p><strong>Com jitter</strong>:</p>
                 <pre><code>Cliente A: 0.8s | B: 1.3s | C: 0.9s
-...distribuidos no tempo</code></pre>
-                <p><strong>Formula</strong>: <code>min(cap, base * 2^attempt) + random(0, jitter)</code></p>`
+...distribuídos no tempo</code></pre>
+                <p><strong>Fórmula</strong>: <code>min(cap, base * 2^attempt) + random(0, jitter)</code></p>`
             },
             {
                 category: "🔧 Tratamento de Falhas",
-                question: "Q17: O que e idempotencia e como implementar?",
-                answer: `<p><strong>Idempotencia</strong>: Operacao executada N vezes = mesmo resultado.</p>
-                <p><strong>Sem idempotencia</strong>:</p>
+                question: "Q17: O que é idempotência e como implementar?",
+                answer: `<p><strong>Idempotência</strong>: Operação executada N vezes = mesmo resultado.</p>
+                <p><strong>Sem idempotência</strong>:</p>
                 <pre><code>POST /payment $10 → Cobrou
 [timeout]
 POST /payment $10 → Cobrou DE NOVO! Total: $20</code></pre>
@@ -1283,8 +1283,8 @@ Idempotency-Key: user123-order456
             },
             {
                 category: "🔧 Tratamento de Falhas",
-                question: "Q18: O que e Circuit Breaker e como previne falhas em cascata?",
-                answer: `<p><strong>Circuit Breaker</strong>: Protege quando dependencias falham.</p>
+                question: "Q18: O que é Circuit Breaker e como previne falhas em cascata?",
+                answer: `<p><strong>Circuit Breaker</strong>: Protege quando dependências falhamencias falham.</p>
                 <pre><code>       ┌─────────┐
        │ CLOSED  │ ← Normal
        └────┬────┘
@@ -1300,29 +1300,29 @@ Idempotency-Key: user123-order456
        └────┬────┘
     sucesso → CLOSED
     falha   → OPEN</code></pre>
-                <p><strong>Beneficios</strong>: Fail fast, reduz carga, self-healing, isolamento.</p>`
+                <p><strong>Benefícios</strong>: Fail fast, reduz carga, self-healing, isolamento.</p>`
             },
             {
                 category: "🔧 Tratamento de Falhas",
-                question: "Q19: O que e 'thundering herd' e como prevenir?",
-                answer: `<p><strong>Thundering Herd</strong>: Muitos clientes atacam recurso recem-disponivel.</p>
+                question: "Q19: O que é 'thundering herd' e como prevenir?",
+                answer: `<p><strong>Thundering Herd</strong>: Muitos clientes atacam recurso recém-disponível.</p>
                 <pre><code>1. DB cai
 2. 10,000 requests esperando
-3. DB sobe (1 instancia)
+3. DB sobe (1 instância)
 4. 10,000 ATACAM
-5. Instancia cai
+5. Instância cai
 6. GOTO 3 (loop de morte)</code></pre>
                 <p><strong>Circuit Breaker ajuda</strong>:</p>
                 <pre><code>[10,000 clients] --X BLOCKED
 [Apenas 1 teste passa]
 [DB sobe com calma]
-[Teste OK → trafego liberado]</code></pre>
+[Teste OK → tráfego liberado]</code></pre>
                 <p><strong>Complementos</strong>: Jitter, rate limiting, gradual ramp-up, bulkhead.</p>`
             },
             {
-                category: "🎯 Cenario Senior",
-                question: "Q20: Como arquitetar notificacoes em tempo real do Facebook (reacoes em lives)?",
-                answer: `<p><strong>Requisitos</strong>: Milhoes simultaneos, fire-and-forget, tempo real.</p>
+                category: "🎯 Cenário Senior",
+                question: "Q20: Como arquitetar notificações em tempo real do Facebook (reações em lives)?",
+                answer: `<p><strong>Requisitos</strong>: Milhões simultâneos, fire-and-forget, tempo real.</p>
                 <pre><code>[VIEWERS: Browser/SSE, App/UDP]
             ↓
     [L7 LOAD BALANCER]
@@ -1334,17 +1334,17 @@ Idempotency-Key: user123-order456
      [KAFKA por live_id]
             ↓
    [REACTION INGESTION]</code></pre>
-                <p><strong>Decisoes</strong>:</p>
+                <p><strong>Decisões</strong>:</p>
                 <ul>
                     <li>Dual protocol: UDP (apps) + HTTP (browsers)</li>
-                    <li>SSE para push (nao WebSocket)</li>
+                    <li>SSE para push (não WebSocket)</li>
                     <li>Batching agressivo</li>
                     <li>Regional partitioning</li>
                 </ul>`
             },
             {
-                category: "🎯 Cenario Senior",
-                question: "Q21: O que acontece quando voce digita google.com e pressiona Enter?",
+                category: "🎯 Cenário Senior",
+                question: "Q21: O que acontece quando você digita google.com e pressiona Enter?",
                 answer: `<pre><code>1. DNS: "Qual IP de google.com?" → 142.250.80.46
 
 2. TCP HANDSHAKE:
@@ -1356,7 +1356,7 @@ Idempotency-Key: user123-order456
 4. HTTP REQUEST:
    GET / HTTP/1.1
 
-5. SERVER PROCESSING ← Unica parte que SWEs controlam!
+5. SERVER PROCESSING ← Única parte que SWEs controlam!
 
 6. HTTP RESPONSE:
    200 OK + HTML
@@ -1366,7 +1366,7 @@ Idempotency-Key: user123-order456
 
 8. TCP TEARDOWN:
    FIN → ACK → FIN → ACK</code></pre>
-                <p><strong>Camadas</strong>: L7 (HTTP/DNS/TLS), L4 (TCP), L3 (IP), L2/L1 (fisico)</p>`
+                <p><strong>Camadas</strong>: L7 (HTTP/DNS/TLS), L4 (TCP), L3 (IP), L2/L1 (físico)</p>`
             }
         ];
 
@@ -1521,7 +1521,7 @@ Idempotency-Key: user123-order456
             incorrect = 0;
             isReviewingMissed = true;
 
-            filterText.textContent = `Revisao (${cards.length})`;
+            filterText.textContent = `Revisão (${cards.length})`;
             completionScreen.classList.remove('visible');
             flashcard.style.display = 'flex';
             updateCard();
